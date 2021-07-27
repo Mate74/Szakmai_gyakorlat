@@ -1,8 +1,10 @@
+% TODO: Ez elé még érdemes lenne összegyűjteni, hogy milyen hasonló játékok vannak. Melyek az azokból preferált elemek, illetve hangsúlyozni kellene, hogy milyen szempontból próbál egyedi lenni a játék.
+
 \Chapter{Koncepció}
 
 A játékot röviden, nagyjából összefoglaló folyamatábra amelyben a közelharc szekvenciát részleteztük egy új folyamatábrában a láthatóság kedvéért. Combat folyamatábra (\ref{fig:combat}. ábra).
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{images/image1.png}
 	\caption{Combat folyamatábra}
@@ -40,21 +42,21 @@ Main menu:
 Ez a gomb akkor szerepel a menüben hogyha egy játékmenet megállításával kerülünk a menübe.
 Ez befejezi a jelenlegi játékmenetünket és visszaírányít minket a főmenübe.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=1]{images/image2.png}
 	\caption{Főmenü}
 	\label{fig:image2}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=1]{images/image3.png}
 	\caption{Játékbeli menü}
 	\label{fig:image3}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=1]{images/image4.png}
 	\caption{Options}
@@ -65,6 +67,16 @@ Ahol a Fekete háttér, az a megállított játék képe lenne elhomályosítva.
 Ha még nem kezdtünk bele egy játékmenetbe, akkor pedig általunk megadott játékmenet képernyőmentése lenne a háttérben elhomályosítva.
 
 \Section{Map}
+
+% TODO: A map-ek szerkezetéről részletesebben írni kellene. Feltételezhetően egy mátrixról van szó, amelynek a celláit itt blokknak nevezzük. Le kellene írni konkrétan az egy-egy blokkhoz tartozó adatokat.
+
+% TODO: A map-ek közötti kapcsolódási pontokat jobban részletezni kellene, és úgy általában a map-en való mozgást.
+
+% TODO: Hogy ha az egymás melleti blokkokra vonatkozóan meg lehet adni valamilyen előírásokat, akkor azt is érdemes részletezni.
+
+% TODO: Célszerű lehet már most legalább vázlatosan példát adni, hogy egy-egy blokk hogyan fog majd kinézni.
+
+% TODO: Hogy ha a térképnek vannak rétegei, akkor arról is írni kellene.
 
 Általunk előre definiált szobatípusokból generált, de szinthez kötötten meg van adva a minimum generálható szoba és a maximum generálható szoba száma.
 Szinthez kötötten adott típusú és mennyiségű entity.
@@ -112,7 +124,11 @@ Karakter alapstatisztikái:
     \item Ügyesség:3
 \end{itemize}
 
+% TODO: Ezeket inkább táblázatos formában kellene közölni, és a konkrét számításokat is le kellene írni hozzájuk.
+
 Megölt ellenség után kapunk tapasztalatipontot az alapján, hogy milyen tipusú az ellenség.
+
+% TODO: Be kellene hivatkozni, hogy ez hol kerül majd részletezésre.
 
 Valahányszor amikor karakterünk szintet lép, kapunk 1 pontot.
 
@@ -145,18 +161,25 @@ A combat akkor kezdődik, ha ellenséggel találkozunk, és az észrevesz minket
 \SubSection{Melee combat}
 
 Közvetlen közelünkben (1 blokknyi távolságra, vagy vízszintesen, vagy függőlegesen).
-Kezdeményezéstől függően dől el ki fogja elkezdeni a harcot, innentől kezdve a két fél felváltva hajtanak végre 1 támadást amivel párhuzamosan történik a sebzés illetve a kitérés, (kitérés: \%-os eséllyel elháríthatunk egy támadást ami után 0 sebzést szenved el az adott harcos) (sebzés:A harcost érő találat és a felszereléséből adott összesített védelem különbségből adódik.A számítás után kapott összeget levonjuk a harcos aktuális életerejéből) ez addig folytatódik amíg valamelyik fél életereje el nem éri a 0-át.Ezután a vesztes fél eldobja nála lévő tárgyait és a combatnak vége.
+
+Kezdeményezéstől függően dől el ki fogja elkezdeni a harcot, innentől kezdve a két fél felváltva hajtanak végre 1 támadást amivel párhuzamosan történik a sebzés illetve a kitérés, (kitérés: \%-os eséllyel elháríthatunk egy támadást ami után 0 sebzést szenved el az adott harcos)
+
+(sebzés: A harcost érő találat és a felszereléséből adott összesített védelem különbségből adódik. A számítás után kapott összeget levonjuk a harcos aktuális életerejéből) ez addig folytatódik amíg valamelyik fél életereje el nem éri a 0-át.Ezután a vesztes fél eldobja nála lévő tárgyait és a combatnak vége.
+
+% TODO: Érdemes lehet kisebb számítási példákat mutatni az általános leírás mellett.
 
 Ha a menekülést választjuk és sikerült továbblépnünk a következő szintre anélkül hogy az ellenfél elkapott volna, az üldöző nem tud tovább lépni a következő szintre.
 
 \SubSection{Ranged combat}
+
+% TODO: A távolságszámítás ez esetben hogyan történik?
 
 Adott távolságon belül, adott támadással.
 Karakterünk alapfelszerelésében található 10db nyilvessző, inventory helyén kívül a jobb alsó sarokban kapott egy saját gombot aminek rákattintásával 1db nyílvesszőt eldobhatunk arra amerre célzunk az így okozott sebzés nem lehet több 2-nél alapesetben.
 
 % TODO: A grafikus megjelenítést és a mögötte lévő modellt nem érdemes keverni. Tipikusan először a modellt, majd annak reprezentációját érdemes bemutatni.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{images/image5.png}
 	\caption{Combat folyamatábra}
@@ -166,6 +189,10 @@ Karakterünk alapfelszerelésében található 10db nyilvessző, inventory hely�
 \Section{Entity}
 
 Egy platformon csak egy darab entity lehet, nem lehet rajtuk átmenni.
+
+% TODO: A platform itt most egy blokkot jelentene?
+
+% TODO: Az entity-k és a karakterek pozíciója milyen számtípussal van megadva?
 
 \noindent No. 1. Entity:
 \begin{itemize}
@@ -215,18 +242,34 @@ Ajtók: Karakterünk vagy egyéb entity-k az ajtó poziciójára lépnek akkor a
 Zárt ajtók: Rákattintunk és a karakterünk a közvetlen közelébe megy és van nálunk hozzá megfelelő kulcsunk akkor a karakterünk egy körért cserébe eltávolítja a zárt az ajtóról, ezek után sima ajtóként funkcionál.
 \item
 Kovácsműhely: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. A szerzett alapanyagok segítségével tudjuk továbbfejleszteni a már meglévő felszereléseinket. Egy körbe kerül.
+
+% TODO: A felugró ablakokról, és úgy általában a widget-ek kezeléséről érdemes részletesebben írni.
+
 \item
-Félkarú rabló: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. Az általunk birtokolt aranyért cserébe esélyünk van játszani a félkarú rablón ami egy körbe kerül.A félkarú rabló nem mindig ad vissza tárgyat csak ha nyerünk vele.A nyeremény az az item amit 3-szor egymás után kipörget a játékos, egy játékon belül.
+Félkarú rabló: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. Az általunk birtokolt aranyért cserébe esélyünk van játszani a félkarú rablón ami egy körbe kerül. A félkarú rabló nem mindig ad vissza tárgyat csak ha nyerünk vele. A nyeremény az az item amit 3-szor egymás után kipörget a játékos, egy játékon belül.
+
+% TODO: Ennek megjelenítéséről érdemes lenne még írni, ábrát készíteni hozzá.
+
+% TODO: A valószínűségeket konkretizálni kellene.
+
 \item
 Főzetfőző állomány: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. Az általunk birtokolt növényi alapanyagok használatával véletlenszerű fözetet készíthetünk, legalább 3 alapanyag szükséges hozzá.
+
+% TODO: A véletlenszerű főzet itt bármi lehet, vagy függ egyéb tényezőtől is?
+
 \item
 Ércek: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk egy körért cserébe eltünteti a közvetlen közelünkben lévő ércet és kapunk egy alapanyagot.
 \item
 Láda: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele. A láda ezekután eltünik és egy tárgyat hagy hátra.
+
+% TODO: Az, hogy milyen tárgy, az mitől függ?
+
 \item
 Zárt láda: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele ha van hozzá megfelelő kulcs és a zárt láda átalakul sima ládává.
 \item
 Lépcsők: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk a következő szintre lép.
+
+% TODO: Ehhez tartozna majd valamilyen külön (modális) animáció is?
 \end{itemize}
 
 \Section{Loot}
@@ -238,10 +281,14 @@ A tárgyak amelyeket nem veszünk fel a játék végéig ott maradnak.
 Minden entity más itemet hagyhat maga után.
 Bizonyos térbeli elemek is adhatnak különböző itemeket.
 
+% TODO: Az, hogy milyen tárgyakat hagynak hátra, az mitől függ?
+
 Bizonyos ládák illetve ajtók kulcsot, igényelhetnek.
 Bármely ellenfél dobhat \%-os eséllyel legalább 20 legfeljebb 70 aranyat, amit félkarú rablóknál lehet elkölteni felszerelések fejlesztésére.
 
-Néhány alap szoba,folyosó platformjainak felét fű borítja amelynek letaposásából \%-os eséllyel kaphatunk magvakat amiket el lehet ültetni ezzel csapdát állítva ellenfeleknek illetve szemgolyókat amik 1 életerőt gyógyítanak.
+% TODO: A [20, 70] intervallumon belül hogy kerül meghatározásra az érték?
+
+Néhány alap szoba, folyosó platformjainak felét fű borítja amelynek letaposásából \%-os eséllyel kaphatunk magvakat amiket el lehet ültetni ezzel csapdát állítva ellenfeleknek illetve szemgolyókat amik 1 életerőt gyógyítanak.
 
 Alapfelszerelésen kívül minden felszerelés amit lootolunk számunkra ismeretlen felvételükkor 10 körig nem lehet levenni őket és a körök lejárta után pozitív vagy negatív effektet adnak.
 
@@ -251,13 +298,16 @@ Szemgolyókon kívül minden item amit lootolhatunk hatásuk számunkra ismeretl
 
 Az itemek a földről úgy vehetőek fel, hogy karakterünk arra a blokkra lép ahol az item található, ekkor megjelenik egy gomb amely rákattintásakor felveszi az itemet hogyha van hely az inventorynkban.
 
+% TODO: Ezt a gombot is, mint widget-et részletezni kellene.
+
 Az inventory mérete fix legyen 20 egység pl.: 4 egység széles 5 egység magas elosztásban.
+
 Az inventoryból minden item egyetlen egy egységet igényel tárolásra.
 
 Leltárban fix helye van az aranynak a jobb alsó sarokban.
 
 Minden tárgyból bármekkora mennyiséget lehet tárolni.
-Egyes objectek nem kerülnek az inventory-ba ennek oka hogy hatásukat kifejtik felvételükkör.(szemgolyók)
+Egyes objectek nem kerülnek az inventory-ba ennek oka hogy hatásukat kifejtik felvételükkör. (szemgolyók)
 
 Entityk vagy térbeli elemek adják.
 különböző felhasználási lehetőségekkel.
@@ -270,10 +320,18 @@ Minden tárgynak, amelyet Entitykből vagy térbeli objektumokból szerezhetőek
 
 Minden mapon annyi kulcs spawnol, véletlenszerűen a szobák egyikébe amennyi kulcs\-csal zárt ajtó generálódott a mapra.
 
+% TODO: Itt hogyan garantálható, hogy egy szoba kulcsa ne abba a szobába kerüljön, amelyikkel be van zárva?
+
 Különleges Kulcsok:
 Máshogy néznek ki grafikailag, mint a sima kulcs és külön vannak tárolva tőlük. Ezek a kulcsok a zárt ládák kinyitására használhatóak.
 
+% TODO: Érdemes lehet ezeket láda kulcsoknak hívni.
+
+% TODO: A játékos tudja, hogy a felvett kulcs az ajtót vagy ládát nyit?
+
 Ha a mapon van zárt láda, mindig 2 van közel egymáshoz. És a mapra mindig csak 1 kulcs kerül hozzá.
+
+% TODO: A közel itt mit jelent pontosan?
 
 \SubSection{Alapanyagok}
 
@@ -285,31 +343,37 @@ A főzetek készítéséhez is szükségünk van alapanyagokra, ezeket szintén 
 \SubSection{Magvak}
 
 Füves platformok letaposásából kaphatunk \%-os eséllyel.
+
+% TODO: Az ilyen jellegű százalékokat hol és hogy kellene megadni?
+
 Mindenfajta magvat el lehet dobni ilyenkor a magból kikelt növény hatása a helyétől körben 1 block távolságban fejti ki hatását 3 körig.
 
 Magvak típusai:
 
-borotva: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami az elültetés helyétől körben 1 platformnyi távolságra 3-at sebez az aktiválás utáni első körben.
+\begin{itemize}
+\item borotva: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami az elültetés helyétől körben 1 platformnyi távolságra 3-at sebez az aktiválás utáni első körben.
+\item gyógyító: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 platformnyi távolságra 3-at gyógyít az aktiválás utáni első körben.
+\item mérgező: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 platformnyi távolságra méreg effektet rak az egységre amely 2 körön keresztül sebez 2-őt.
+\end{itemize}
 
-gyógyító: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 platformnyi távolságra 3-at gyógyít az aktiválás utáni első körben.
-
-mérgező: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 platformnyi távolságra méreg effektet rak az egységre amely 2 körön keresztül sebez 2-őt.
+% TODO: A sebzés és gyógyítás kiértékelési sorrendjét érdemes vizsgálni!
 
 \SubSection{Főzetek}
 
-Játékban talált alapanyagokat összefőzhetjük egy adott főzőállomásnál , amely egy véletlenszerű hatású főzetet ad vissza nekünk.
+Játékban talált alapanyagokat összefőzhetjük egy adott főzőállomásnál, amely egy véletlenszerű hatású főzetet ad vissza nekünk.
 Továbbá szimplán találhatunk szobákban ismeretlen főzeteket.
 Minden főzetet el lehet dobni vagy meglehet inni, ilyenkor a becsapódás helyétől körben 1 block-nyira hat.
 
 Főzetek típusai:
 \begin{itemize}
 \item Gyógyítás: A jelenlegi HP-nk 80\%-át visszatölti használatkor.
+% TODO: A számításokkal kapcsolatban érdemes részletezni a kerekítési szabályokat is.
 \item Mérgezés: Megmérgez minket, amely körönként 3 sebzést okoz, 3körig. Ellenségre is lehet dobni.
 \item Altató: Elaltat minket 3körig, ellenségre is alkalmazható.
 \item Azonnali sebzés: Használatkor azonnal sebez 30\%-ot a maximum HP-ból. Ellenségre is alkalmazható.
 \item Teleport: Használatkor elteleportálja a karakterünket véletlenszerű helyre a mapon belül, eldobáskor maximum 3 entityt, saját magunkat beleszámolva telepíthet el, több különböző helyre.
 \item Felderítő: Minden szobát úgy látunk, mintha már lettünk volna ott előzőleg. Véglegesen.
-\item Lebegés: Csapdákat, vizes területeket, kerülhetünk el használatkor.10 körig tart a hatása.
+\item Lebegés: Csapdákat, vizes területeket, kerülhetünk el használatkor. 10 körig tart a hatása.
 \end{itemize}
 
 \Section{Idő}
@@ -326,22 +390,26 @@ Legyen a fény forrása a karakter, az adott szobában, nagyságától függetle
 A szobákat mindig felülnézetben láthatjuk, ahol a kamera leköveti a karakter mozgását, úgy hogy mindig középen legyen az.
 A bal egérgomb letartásával és egér mozgatásával tudjuk mozgatni a kamerát.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=1]{images/image6.png}
 	\caption{Kamera 1}
 	\label{fig:camera1}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=1]{images/image7.png}
 	\caption{Kamera 2}
 	\label{fig:camera2}
 \end{figure}
 
-A fenti képeken láthatunk egy szobát amelyben a karakterünk van (piros gömb), a fény arra terjed amerre a karakterünk forogna,ellátna.
+\Aref{fig:camera1}. és \aref{fig:camera2}. ábrákon láthatunk egy szobát amelyben a karakterünk van (piros gömb), a fény arra terjed amerre a karakterünk forogna,ellátna.
 Az ajtók ha nyitva vannak a fény továbbterjed a folyosóra.
+
+% TODO: Az árnyékos részen hogyan látszódnak az ellenfelek és a felvehető tárgyak?
+
+% TODO: A bejárt és a még be nem járt területek között van különbség láthatóság szempontjából?
 
 \Section{Irányítás}
 
@@ -349,6 +417,10 @@ A kurzor használatával az adott területre kattintva halad oda a karakter.
 Bizonyos helyezetekben megjelenő gombokra kattintva bizonyos tevékenységek lebonyolítása.
 Egyéb menü/inventory megjelenítés bizonyos gombok segítségével(Esc,I, stb…)
 A már általunk felfedezett területre kattintva karakterünk a lehető leggyorsabb útvonalat választja.
+
+% TODO: Az esemény a lenyomásra vagy a felengedésre aktiválódik?
+
+% TODO: Egy műveletet vissza lehet vonni annak végrehajtása közben?
 
 \Section{Az interface-n megjelenő gombok}
 
