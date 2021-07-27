@@ -105,32 +105,56 @@ A szobák formáit akkor láthatjuk, ha nem tartózkodunk benne, ha már voltunk
 \Section{Szint}
 
 Karakter alapstatisztikái:
-HP:20
-Erő:4
-Intelligencia:3
-Ügyesség:3
-Megölt ellenség után kapunk tapasztalatipontot az alapján, hogy milyen tipusú az ellenség. Valahányszor amikor karakterünk szintet lép, kapunk 1 pontot.
+\begin{itemize}
+    \item HP:20
+    \item Erő:4
+    \item Intelligencia:3
+    \item Ügyesség:3
+\end{itemize}
+
+Megölt ellenség után kapunk tapasztalatipontot az alapján, hogy milyen tipusú az ellenség.
+
+Valahányszor amikor karakterünk szintet lép, kapunk 1 pontot.
+
 A második szint eléréséhez 20 tapasztalatipont minden következő szinthez +5 tapasztalatipont elérése szükséges az előző szinthez képest.
+
 A karakter ablakon belül 4 lehetőség van, amelyek közül választhatunk mit fejleszthetjük tovább:
-Vitalitás: Megnöveli a maximális életerőnket.
-Erő: Erősíti a fizikai támadásokat.
-Intelligencia: Erősíti a mágikus támadásokat.
-Ügyesség: Erősíti a Íjjal való támadásainkat.
+\begin{itemize}
+    \item Vitalitás: Megnöveli a maximális életerőnket.
+    \item Erő: Erősíti a fizikai támadásokat.
+    \item Intelligencia: Erősíti a mágikus támadásokat.
+    \item Ügyesség: Erősíti a Íjjal való támadásainkat.
+\end{itemize}
+
 Minden következő szint több entity megölését igényli.
 Minden vitalitáspont +2 életerőt ad.
+
+% TODO: Az ellenség és az entity ugyanazt jelentené? (Ezt pontosítani kellene.)
+
 Minden erőpont +2 növeli a fizikai támadásainkat.
 Minden intelligenciapont +1-el növeli a mágikus támadásainkat.
+
 Minden ügyességpont +1-el növeli a íjjal való támadásainkat.
+
 Minden stat 5-ször fejleszthető.
 
 \Section{Combat}
 
 A combat akkor kezdődik, ha ellenséggel találkozunk, és az észrevesz minket, ha nem, akkor lehetséges a rajtaütés.
-melee combat: közvetlen közelünkben (1blocknyi távolságra, vagy vízszintesen, vagy függőlegesen).
-Kezdeményezéstől függően dől el ki fogja elkezdeni a harcot, innentől kezdve a két fél felváltva hajtanak végre 1 támadást amivel párhuzamosan történik a sebzés illetve a kitérés,(kitérés: \%-os eséllyel elháríthatunk egy támadást ami után 0 sebzést szenved el az adott harcos)(sebzés:A harcost érő találat és a felszereléséből adott összesített védelem különbségből adódik.A számítás után kapott összeget levonjuk a harcos aktuális életerejéből) ez addig folytatódik amíg valamelyik fél életereje el nem éri a 0-át.Ezután a vesztes fél eldobja nála lévő tárgyait és a combatnak vége.
+
+\SubSection{Melee combat}
+
+Közvetlen közelünkben (1 blokknyi távolságra, vagy vízszintesen, vagy függőlegesen).
+Kezdeményezéstől függően dől el ki fogja elkezdeni a harcot, innentől kezdve a két fél felváltva hajtanak végre 1 támadást amivel párhuzamosan történik a sebzés illetve a kitérés, (kitérés: \%-os eséllyel elháríthatunk egy támadást ami után 0 sebzést szenved el az adott harcos) (sebzés:A harcost érő találat és a felszereléséből adott összesített védelem különbségből adódik.A számítás után kapott összeget levonjuk a harcos aktuális életerejéből) ez addig folytatódik amíg valamelyik fél életereje el nem éri a 0-át.Ezután a vesztes fél eldobja nála lévő tárgyait és a combatnak vége.
+
 Ha a menekülést választjuk és sikerült továbblépnünk a következő szintre anélkül hogy az ellenfél elkapott volna, az üldöző nem tud tovább lépni a következő szintre.
-ranged combat: Adott távolságon belül, adott támadással.
+
+\SubSection{Ranged combat}
+
+Adott távolságon belül, adott támadással.
 Karakterünk alapfelszerelésében található 10db nyilvessző, inventory helyén kívül a jobb alsó sarokban kapott egy saját gombot aminek rákattintásával 1db nyílvesszőt eldobhatunk arra amerre célzunk az így okozott sebzés nem lehet több 2-nél alapesetben.
+
+% TODO: A grafikus megjelenítést és a mögötte lévő modellt nem érdemes keverni. Tipikusan először a modellt, majd annak reprezentációját érdemes bemutatni.
 
 \begin{figure}[h]
 	\centering
@@ -142,103 +166,159 @@ Karakterünk alapfelszerelésében található 10db nyilvessző, inventory hely�
 \Section{Entity}
 
 Egy platformon csak egy darab entity lehet, nem lehet rajtuk átmenni.
-No. 1. Entity:
-Körönként 1 lépést tesz meg.
-Körönként 1 támadást hajt végre.
-Nagyobb kitérés.
-Ajtóban sebezhetőek az első támadásig.
-Halálukkor 5 tapasztalati pontot adnak.
-No. 2. Entity:
-Körönként 1 lépést tesz meg.
-Körönként 1 támadást hajt végre.
-Halálukkor 3 tapasztalati pontot adnak.
-No. 3. Entity:
-Körönként 3 lépést tesz meg.
-Körönként 3 támadást hajt végre.
-Halálukkor 4 tapasztalati pontot adnak.
-No. 4. Entity:
-Körönként 1 lépést tesz meg.
-Körönként 3 támadást hajt végre.
-Halálukkor 4 tapasztalati pontot adnak.
-Képes ranged attack-ok végrehajtására 3 blocknyi távolságból.
-Egyéb:
-Az Entytik elkerülik a rejtett csapdákat.
-Az Entytik 80\%-a alvó állapotba kerül be a szobák egyikébe és úgy is marad amíg meg nem közelíti a játékos az adott szobát.
-A többi nem alvó szabadon mozog, valahányszor mi is kört igénylő cselekvést hajtunk végbe.
+
+\noindent No. 1. Entity:
+\begin{itemize}
+    \item Körönként 1 lépést tesz meg.
+    \item Körönként 1 támadást hajt végre.
+    \item Nagyobb kitérés.
+    \item Ajtóban sebezhetőek az első támadásig.
+    \item Halálukkor 5 tapasztalati pontot adnak.
+\end{itemize}
+
+\noindent No. 2. Entity:
+\begin{itemize}
+    \item Körönként 1 lépést tesz meg.
+    \item Körönként 1 támadást hajt végre.
+    \item Halálukkor 3 tapasztalati pontot adnak.
+\end{itemize}
+
+\noindent No. 3. Entity:
+\begin{itemize}
+    \item Körönként 3 lépést tesz meg.
+    \item Körönként 3 támadást hajt végre.
+    \item Halálukkor 4 tapasztalati pontot adnak.
+\end{itemize}
+
+\noindent No. 4. Entity:
+\begin{itemize}
+    \item Körönként 1 lépést tesz meg.
+    \item Körönként 3 támadást hajt végre.
+    \item Halálukkor 4 tapasztalati pontot adnak.
+    \item Képes ranged attack-ok végrehajtására 3 blocknyi távolságból.
+\end{itemize}
+
+\noindent Egyéb:
+\begin{itemize}
+    \item Az Entytik elkerülik a rejtett csapdákat.
+    \item Az Entytik 80\%-a alvó állapotba kerül be a szobák egyikébe és úgy is marad amíg meg nem közelíti a játékos az adott szobát.
+    \item A többi nem alvó szabadon mozog, valahányszor mi is kört igénylő cselekvést hajtunk végbe.
+\end{itemize}
 
 \Section{Térbeli objektumok}
 
 A térbeli objektumokra karakterünk nem képes rálépni, nem lát át rajtuk.
+\begin{itemize}
+\item
 Ajtók: Karakterünk vagy egyéb entity-k az ajtó poziciójára lépnek akkor az ajtó kinyílik ha nem kulccsal zárt.
+\item
 Zárt ajtók: Rákattintunk és a karakterünk a közvetlen közelébe megy és van nálunk hozzá megfelelő kulcsunk akkor a karakterünk egy körért cserébe eltávolítja a zárt az ajtóról, ezek után sima ajtóként funkcionál.
+\item
 Kovácsműhely: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. A szerzett alapanyagok segítségével tudjuk továbbfejleszteni a már meglévő felszereléseinket. Egy körbe kerül.
+\item
 Félkarú rabló: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. Az általunk birtokolt aranyért cserébe esélyünk van játszani a félkarú rablón ami egy körbe kerül.A félkarú rabló nem mindig ad vissza tárgyat csak ha nyerünk vele.A nyeremény az az item amit 3-szor egymás után kipörget a játékos, egy játékon belül.
+\item
 Főzetfőző állomány: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. Az általunk birtokolt növényi alapanyagok használatával véletlenszerű fözetet készíthetünk, legalább 3 alapanyag szükséges hozzá.
+\item
 Ércek: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk egy körért cserébe eltünteti a közvetlen közelünkben lévő ércet és kapunk egy alapanyagot.
+\item
 Láda: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele. A láda ezekután eltünik és egy tárgyat hagy hátra.
+\item
 Zárt láda: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele ha van hozzá megfelelő kulcs és a zárt láda átalakul sima ládává.
+\item
 Lépcsők: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk a következő szintre lép.
+\end{itemize}
 
 \Section{Loot}
 
 Az ellenfelek halál esetén \%-os eséllyel hagynak hátra maguk után valamilyen itemet.
 
 A tárgyak amelyeket nem veszünk fel a játék végéig ott maradnak.
+
 Minden entity más itemet hagyhat maga után.
 Bizonyos térbeli elemek is adhatnak különböző itemeket.
+
 Bizonyos ládák illetve ajtók kulcsot, igényelhetnek.
 Bármely ellenfél dobhat \%-os eséllyel legalább 20 legfeljebb 70 aranyat, amit félkarú rablóknál lehet elkölteni felszerelések fejlesztésére.
+
 Néhány alap szoba,folyosó platformjainak felét fű borítja amelynek letaposásából \%-os eséllyel kaphatunk magvakat amiket el lehet ültetni ezzel csapdát állítva ellenfeleknek illetve szemgolyókat amik 1 életerőt gyógyítanak.
+
 Alapfelszerelésen kívül minden felszerelés amit lootolunk számunkra ismeretlen felvételükkor 10 körig nem lehet levenni őket és a körök lejárta után pozitív vagy negatív effektet adnak.
+
 Szemgolyókon kívül minden item amit lootolhatunk hatásuk számunkra ismeretlen első használatkor, a játék előrehaladtával ismerjük meg különböző tekercsek illetve főzetek effektjeit,a már egyszer használt itemek effektjeit karakterünk ismeri.
 
 \Section{Itemek}
 
 Az itemek a földről úgy vehetőek fel, hogy karakterünk arra a blokkra lép ahol az item található, ekkor megjelenik egy gomb amely rákattintásakor felveszi az itemet hogyha van hely az inventorynkban.
+
 Az inventory mérete fix legyen 20 egység pl.: 4 egység széles 5 egység magas elosztásban.
 Az inventoryból minden item egyetlen egy egységet igényel tárolásra.
+
 Leltárban fix helye van az aranynak a jobb alsó sarokban.
+
 Minden tárgyból bármekkora mennyiséget lehet tárolni.
 Egyes objectek nem kerülnek az inventory-ba ennek oka hogy hatásukat kifejtik felvételükkör.(szemgolyók)
+
 Entityk vagy térbeli elemek adják.
 különböző felhasználási lehetőségekkel.
 Fegyverek, Armorok.
+
 Bizonyos stat növelők (Főzetek).
 Minden tárgynak, amelyet Entitykből vagy térbeli objektumokból szerezhetőek meg, nem fix esélyű tárgyak.
-Kulcsok:
-Minden mapon annyi kulcs spawnol, véletlenszerűen a szobák egyikébe amennyi kulccsal zárt ajtó generálódott a mapra.
+
+\SubSection{Kulcsok}
+
+Minden mapon annyi kulcs spawnol, véletlenszerűen a szobák egyikébe amennyi kulcs\-csal zárt ajtó generálódott a mapra.
+
 Különleges Kulcsok:
 Máshogy néznek ki grafikailag, mint a sima kulcs és külön vannak tárolva tőlük. Ezek a kulcsok a zárt ládák kinyitására használhatóak.
+
 Ha a mapon van zárt láda, mindig 2 van közel egymáshoz. És a mapra mindig csak 1 kulcs kerül hozzá.
-Alapanyagok:
+
+\SubSection{Alapanyagok}
+
 Bizonyos felszerélesek fejlesztéséhez bizonyos alapanyagok szükségesek, ezeket megszerezhetjük ellenségektől vagy térbeli objektumokkal.
 Ilyen térbeli objektum például egy érc, vagy egy növény.
+
 A főzetek készítéséhez is szükségünk van alapanyagokra, ezeket szintén Entityk is dobhatják, de beszerezhetjük őket növényekből is.
-Magvak:
-Füves platformok letaposásából kaphatunk \%-os eséllyel. 
+
+\SubSection{Magvak}
+
+Füves platformok letaposásából kaphatunk \%-os eséllyel.
 Mindenfajta magvat el lehet dobni ilyenkor a magból kikelt növény hatása a helyétől körben 1 block távolságban fejti ki hatását 3 körig.
+
 Magvak típusai:
+
 borotva: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami az elültetés helyétől körben 1 platformnyi távolságra 3-at sebez az aktiválás utáni első körben.
+
 gyógyító: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 platformnyi távolságra 3-at gyógyít az aktiválás utáni első körben.
+
 mérgező: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 platformnyi távolságra méreg effektet rak az egységre amely 2 körön keresztül sebez 2-őt.
-Főzetek:
+
+\SubSection{Főzetek}
+
 Játékban talált alapanyagokat összefőzhetjük egy adott főzőállomásnál , amely egy véletlenszerű hatású főzetet ad vissza nekünk.
 Továbbá szimplán találhatunk szobákban ismeretlen főzeteket.
 Minden főzetet el lehet dobni vagy meglehet inni, ilyenkor a becsapódás helyétől körben 1 block-nyira hat.
+
 Főzetek típusai:
-Gyógyítás: A jelenlegi HP-nk 80\%-át visszatölti használatkor.
-Mérgezés: Megmérgez minket, amely körönként 3 sebzést okoz, 3körig. Ellenségre is lehet dobni.
-Altató: Elaltat minket 3körig, ellenségre is alkalmazható.
-Azonnali sebzés: Használatkor azonnal sebez 30\%-ot a maximum HP-ból. Ellenségre is alkalmazható.
-Teleport: Használatkor elteleportálja a karakterünket véletlenszerű helyre a mapon belül, eldobáskor maximum 3 entityt, saját magunkat beleszámolva telepíthet el, több különböző helyre.
-Felderítő: Minden szobát úgy látunk, mintha már lettünk volna ott előzőleg. Véglegesen.
-Lebegés: Csapdákat, vizes területeket, kerülhetünk el használatkor.10 körig tart a hatása.
+\begin{itemize}
+\item Gyógyítás: A jelenlegi HP-nk 80\%-át visszatölti használatkor.
+\item Mérgezés: Megmérgez minket, amely körönként 3 sebzést okoz, 3körig. Ellenségre is lehet dobni.
+\item Altató: Elaltat minket 3körig, ellenségre is alkalmazható.
+\item Azonnali sebzés: Használatkor azonnal sebez 30\%-ot a maximum HP-ból. Ellenségre is alkalmazható.
+\item Teleport: Használatkor elteleportálja a karakterünket véletlenszerű helyre a mapon belül, eldobáskor maximum 3 entityt, saját magunkat beleszámolva telepíthet el, több különböző helyre.
+\item Felderítő: Minden szobát úgy látunk, mintha már lettünk volna ott előzőleg. Véglegesen.
+\item Lebegés: Csapdákat, vizes területeket, kerülhetünk el használatkor.10 körig tart a hatása.
+\end{itemize}
 
 \Section{Idő}
 
 A szobán belülre kattintva odamegy a karakter ahova kattintunk, ha nem fedezz fel új ellenséget, ha mégis akkor megáll.
+
 Az ellenfeleknek annyi akciója van amennyi akciót elvégeztünk a karaktereinkkel és velünk párhuzamosan cselekednek.
-Az idő csak akkor telik amikor karakterünk végrehajt valamilyen akciót.Akciónak számít a mozgás,keresés,támadás,védekezés,tárgy használata.
+
+Az idő csak akkor telik amikor karakterünk végrehajt valamilyen akciót.Akciónak számít a mozgás, keresés, támadás, védekezés, tárgy használata.
 
 \Section{Kamera}
 
@@ -272,53 +352,73 @@ A már általunk felfedezett területre kattintva karakterünk a lehető leggyor
 
 \Section{Az interface-n megjelenő gombok}
 
-Tárgyfelvételi gomb:
-prekondíció:A karakterünk egy tárgy helyén áll.
-általános müködés: Az egeret rávisszük a tárgyfelvételnek szánt gombra, és bal egérgombbal rákattintunk.
-alternatív esetek:Több item van egyhelyen, egyszerre csak egy itemet veszünk fel.
-postkondíció:Az item bekerült az inventorynkba.
-kivételes esetek:Nincs hely az inventoryban új tárgy felvételéhez.
+\SubSection{Tárgyfelvételi gomb}
 
-Menü:
-prekondíció: Játékmenetben vagyunk.
-általános működés: Az egeret rávisszük a menünek szánt gombra, és bal egérgombbal rákattintunk.
-alternatív esetek: Rossz ablak nyílik meg, nem pedig a menü, például az inventory.
-Postkondíció: Megnyílt a menü, válaszhatunk, hogy mit szeretnénk továbbá megnyitni. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
-kivételes esetek: Nem nyílt meg a menü, bal egérgomb kattintásával.
+\begin{itemize}
+    \item prekondíció:A karakterünk egy tárgy helyén áll.
+    általános müködés: Az egeret rávisszük a tárgyfelvételnek szánt gombra, és bal egérgombbal rákattintunk.
+    \item alternatív esetek: Több item van egyhelyen, egyszerre csak egy itemet veszünk fel.
+    \item postkondíció: Az item bekerült az inventorynkba.
+    kivételes esetek: Nincs hely az inventoryban új tárgy felvételéhez.
+\end{itemize}
 
-Inventory:
-prekondíció:Játékmenetben vagyunk.
-általános működés: : Az egeret rávisszük az inventorynak szánt gombra, és bal egérgombbal rákattintunk.
+\SubSection{Menü}
 
-Postkondíció: Megnyílt az inventory, válaszhatunk, hogy az inventoryban tárolt tárgyak közül melyikkel lépünk kapcsolatba. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
-alternatív esetek: Rossz ablak nyílik meg, nem pedig az inventory, például a karakter.
-kivételes esetek: Nem nyílt meg az inventory, bal egérgomb kattintásával.
+\begin{itemize}
+    \item prekondíció: Játékmenetben vagyunk.
+    általános működés: Az egeret rávisszük a menünek szánt gombra, és bal egérgombbal rákattintunk.
+    \item alternatív esetek: Rossz ablak nyílik meg, nem pedig a menü, például az inventory.
+    \item Postkondíció: Megnyílt a menü, válaszhatunk, hogy mit szeretnénk továbbá megnyitni. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
+    \item kivételes esetek: Nem nyílt meg a menü, bal egérgomb kattintásával.
+\end{itemize}
 
-íj:
-prekondíció: Játékmenetben vagyunk.
-általános működés: : Az egeret rávisszük az íjnak szánt gombra, és bal egérgombbal rákattintunk.
-Postkondíció: Ha van ellenség adott távolságon belül, akkor megjelenik a legközelebbi ellenfelen egy célkereszt, amely után, ha rákattintunk, végbe megy a támadás. Ha nincs ellenség, nincs célkereszt.
-Lőttünk vagy abbahagytuk az adott cselekvést, a kurzor visszaalakul.
-alternatív esetek: Nincs nyíl a karakternél, nem megy végbe a támadás.
-kivételes esetek: Nem vált át íjra a karakter. Hiába kattintunk a gombra.
+\SubSection{Inventory}
 
-Súgó:
-prekondíció: Játékmenetben vagyunk.
-általános működés: Az egeret rávisszük a súgónak szánt gombra, és bal egérgombbal rákattintunk.
-Postkondíció: : Ha a játékon belüli objectre kattintunk, akkor megjelenik egy felugró ablakban az adott object rövid leírása. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
-alternatív esetek: Nem annak az objectnek jelenik meg a leírása, mint amire rákattintottunk.
-kivételes esetek: Nincsen elérhető információ az adott objectről.
+\begin{itemize}
+    \item prekondíció: Játékmenetben vagyunk.
+    \item általános működés: : Az egeret rávisszük az inventorynak szánt gombra, és bal egérgombbal rákattintunk.
+    \item Postkondíció: Megnyílt az inventory, válaszhatunk, hogy az inventoryban tárolt tárgyak közül melyikkel lépünk kapcsolatba. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
+    alternatív esetek: Rossz ablak nyílik meg, nem pedig az inventory, például a karakter.
+    \item kivételes esetek: Nem nyílt meg az inventory, bal egérgomb kattintásával.
+\end{itemize}
 
-keresés:
-prekondíció: Játékmenetben vagyunk.
-általános működés: : Az egeret rávisszük a keresésnek szánt gombra, és bal egérgombbal rákattintunk.
-Postkondíció: Megjelennek a karakterünk közvetlen közelében lévő rejtett objectek. Például rejtett ajtó/csapda. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
-alternatív esetek: Nem az a funkció megy végbe, amelyet szerettünk volna.
-kivételes esetek: Nem jelenik meg, hiába kéne megjelennie keresés után az adott objectnek.
+\SubSection{Íj}
 
-karakter:
-prekondíció: Játékmenetben vagyunk.
-általános működés: Az egeret rávisszük a karakternek szánt gombra, és bal egérgombbal rákattintunk.
-Postkondíció: Megjelenik 4 különböző lehetőség, hogy mit fejlesszünk a karakterünkön amelyek akkor mennek végbe ha van hozzá elegendő pontunk. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
-alternatív esetek:Nem a mi karakterünk jelennek meg az információk.
-kivételes eset:Nem jön elő a felugró ablak.
+\begin{itemize}
+    \item prekondíció: Játékmenetben vagyunk.
+    általános működés: : Az egeret rávisszük az íjnak szánt gombra, és bal egérgombbal rákattintunk.
+    \item Postkondíció: Ha van ellenség adott távolságon belül, akkor megjelenik a legközelebbi ellenfelen egy célkereszt, amely után, ha rákattintunk, végbe megy a támadás. Ha nincs ellenség, nincs célkereszt.
+    Lőttünk vagy abbahagytuk az adott cselekvést, a kurzor visszaalakul.
+    \item alternatív esetek: Nincs nyíl a karakternél, nem megy végbe a támadás.
+    \item kivételes esetek: Nem vált át íjra a karakter. Hiába kattintunk a gombra.
+\end{itemize}
+
+\SubSection{Súgó}
+
+\begin{itemize}
+    \item prekondíció: Játékmenetben vagyunk.
+    általános működés: Az egeret rávisszük a súgónak szánt gombra, és bal egérgombbal rákattintunk.
+    \item Postkondíció: : Ha a játékon belüli objectre kattintunk, akkor megjelenik egy felugró ablakban az adott object rövid leírása. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
+    \item alternatív esetek: Nem annak az objectnek jelenik meg a leírása, mint amire rákattintottunk.
+    \item kivételes esetek: Nincsen elérhető információ az adott objectről.
+\end{itemize}
+
+\SubSection{keresés}
+
+\begin{itemize}
+    \item prekondíció: Játékmenetben vagyunk.
+    általános működés: : Az egeret rávisszük a keresésnek szánt gombra, és bal egérgombbal rákattintunk.
+    \item Postkondíció: Megjelennek a karakterünk közvetlen közelében lévő rejtett objectek. Például rejtett ajtó/csapda. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
+    \item alternatív esetek: Nem az a funkció megy végbe, amelyet szerettünk volna.
+    \item kivételes esetek: Nem jelenik meg, hiába kéne megjelennie keresés után az adott objectnek.
+\end{itemize}
+
+\SubSection{Karakter}
+
+\begin{itemize}
+    \item prekondíció: Játékmenetben vagyunk.
+    általános működés: Az egeret rávisszük a karakternek szánt gombra, és bal egérgombbal rákattintunk.
+    \item Postkondíció: Megjelenik 4 különböző lehetőség, hogy mit fejlesszünk a karakterünkön amelyek akkor mennek végbe ha van hozzá elegendő pontunk. Az ablak jobb felső sarkában lévő X gombra kattintva visszatérünk a játékba.
+    \item alternatív esetek:Nem a mi karakterünk jelennek meg az információk.
+    \item kivételes eset:Nem jön elő a felugró ablak.
+\end{itemize}
