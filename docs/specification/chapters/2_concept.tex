@@ -1,7 +1,9 @@
-% TODO: Ez elé még érdemes lenne összegyűjteni, hogy milyen hasonló játékok vannak. Melyek az azokból preferált elemek, illetve hangsúlyozni kellene, hogy milyen szempontból próbál egyedi lenni a játék.
+% TODO: Ez elé még érdemes lenne összegyűjteni, hogy milyen hasonló játékok vannak. Melyek az azokból preferált elemek, illetve hangsúlyozni kellene, hogy milyen szempontból próbál egyedi lenni a játék. -
 
 \Chapter{Koncepció}
 
+A játék bizonyos játékokbólmár ismert elemeket tartalmaz, ilyen pédául a Pixel Dungeon és Darkest Dungeon-ből már ismert folyosó-szoba kapcsolat, ahol a dungeon több különböző szobából épül fel, amelyeket folyosók kötnek össze. A Darkest Dungeon-nel ellentétbnen, arra törekszünk, hogy a játékos ne legyen lekorlátozva az adott szobára 'combat' közben.
+De milyen szempontokból is próbál egyedi lenne a játék? A hangsúly a környezetünk nagyobb bevonása a 'combat' fázisba és a 'combat' átdolgozása olyanannyira hogy elég komplex legyen az ideális lépések megtalálása.
 A játékot röviden, nagyjából összefoglaló folyamatábra amelyben a közelharc szekvenciát részleteztük egy új folyamatábrában a láthatóság kedvéért. Combat folyamatábra (\ref{fig:combat}. ábra).
 
 \begin{figure}[h!]
@@ -145,7 +147,9 @@ A karakter ablakon belül 4 lehetőség van, amelyek közül választhatunk mit 
 Minden következő szint több entity megölését igényli.
 Minden vitalitáspont +2 életerőt ad.
 
-% TODO: Az ellenség és az entity ugyanazt jelentené? (Ezt pontosítani kellene.)
+Minden "ellenség" entity, de nem minden entity ellenséges.
+
+% TODO: Az ellenség és az entity ugyanazt jelentené? (Ezt pontosítani kellene.) -
 
 Minden erőpont +2 növeli a fizikai támadásainkat.
 Minden intelligenciapont +1-el növeli a mágikus támadásainkat.
@@ -188,9 +192,9 @@ Karakterünk alapfelszerelésében található 10db nyilvessző, inventory hely�
 
 \Section{Entity}
 
-Egy platformon csak egy darab entity lehet, nem lehet rajtuk átmenni.
+Egy blokk-on csak egy darab entity lehet, nem lehet rajtuk átmenni.
 
-% TODO: A platform itt most egy blokkot jelentene?
+% TODO: A platform itt most egy blokkot jelentene? -
 
 % TODO: Az entity-k és a karakterek pozíciója milyen számtípussal van megadva?
 
@@ -267,9 +271,9 @@ Láda: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaért
 \item
 Zárt láda: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele ha van hozzá megfelelő kulcs és a zárt láda átalakul sima ládává.
 \item
-Lépcsők: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk a következő szintre lép.
+Lépcsők: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk a következő szintre lép. Ilyenkor egy kisebb animáció történik, ahol a karakterünk lesétál a lépcsőn, és elsötétedik a kép.
 
-% TODO: Ehhez tartozna majd valamilyen külön (modális) animáció is?
+% TODO: Ehhez tartozna majd valamilyen külön (modális) animáció is? -
 \end{itemize}
 
 \Section{Loot}
@@ -281,12 +285,14 @@ A tárgyak amelyeket nem veszünk fel a játék végéig ott maradnak.
 Minden entity más itemet hagyhat maga után.
 Bizonyos térbeli elemek is adhatnak különböző itemeket.
 
-% TODO: Az, hogy milyen tárgyakat hagynak hátra, az mitől függ?
+Minden entitynek van egy loot táblája amiben elő van írva, hogy milyen tárgyat hagyhat maga után milyen százalékos eséllyel. 
+
+% TODO: Az, hogy milyen tárgyakat hagynak hátra, az mitől függ? -
 
 Bizonyos ládák illetve ajtók kulcsot, igényelhetnek.
-Bármely ellenfél dobhat \%-os eséllyel legalább 20 legfeljebb 70 aranyat, amit félkarú rablóknál lehet elkölteni felszerelések fejlesztésére.
+Bármely entity dobhat \%-os eséllyel [20, 70] intervallumon belüli aranyat, amit félkarú rablóknál lehet elkölteni felszerelések fejlesztésére.
 
-% TODO: A [20, 70] intervallumon belül hogy kerül meghatározásra az érték?
+% TODO: A [20, 70] intervallumon belül hogy kerül meghatározásra az érték? -
 
 Néhány alap szoba, folyosó platformjainak felét fű borítja amelynek letaposásából \%-os eséllyel kaphatunk magvakat amiket el lehet ültetni ezzel csapdát állítva ellenfeleknek illetve szemgolyókat amik 1 életerőt gyógyítanak.
 
@@ -319,17 +325,17 @@ Minden tárgynak, amelyet Entitykből vagy térbeli objektumokból szerezhetőek
 \SubSection{Kulcsok}
 
 Minden mapon annyi kulcs spawnol, véletlenszerűen a szobák egyikébe amennyi kulcs\-csal zárt ajtó generálódott a mapra.
-
+Kulcsok csak nyitott szobákba kerülnek generáláskor, így gátolva az esetleges 'lehetetlen' helyzeteket.
 % TODO: Itt hogyan garantálható, hogy egy szoba kulcsa ne abba a szobába kerüljön, amelyikkel be van zárva?
 
-Különleges Kulcsok:
+Láda Kulcsok:
 Máshogy néznek ki grafikailag, mint a sima kulcs és külön vannak tárolva tőlük. Ezek a kulcsok a zárt ládák kinyitására használhatóak.
-
+A Játékos felvételekor tisztában van azzal hogy az adott kulcsnak mi a szerepe, a nevéből és a leírásából.
 % TODO: Érdemes lehet ezeket láda kulcsoknak hívni.
 
 % TODO: A játékos tudja, hogy a felvett kulcs az ajtót vagy ládát nyit?
 
-Ha a mapon van zárt láda, mindig 2 van közel egymáshoz. És a mapra mindig csak 1 kulcs kerül hozzá.
+Ha a mapon van zárt láda, mindig 2 van vízszintesen és függőlegesen is legalább 1 blokk távolságra és maximum 2 blokk távolságra. És a mapra mindig csak 1 kulcs kerül hozzá.
 
 % TODO: A közel itt mit jelent pontosan?
 
@@ -342,8 +348,8 @@ A főzetek készítéséhez is szükségünk van alapanyagokra, ezeket szintén 
 
 \SubSection{Magvak}
 
-Füves platformok letaposásából kaphatunk \%-os eséllyel.
-
+Fűvel ellátott blokk letaposásából(az adott blokkra lépéssel) kaphatunk \%-os eséllyel.
+Minden fű típusnak van egy loot táblája, ahol meg van adva melyik fű típus, milyen eséllyel, milyen itemet hagy hátra maga után.
 % TODO: Az ilyen jellegű százalékokat hol és hogy kellene megadni?
 
 Mindenfajta magvat el lehet dobni ilyenkor a magból kikelt növény hatása a helyétől körben 1 block távolságban fejti ki hatását 3 körig.
@@ -407,9 +413,12 @@ A bal egérgomb letartásával és egér mozgatásával tudjuk mozgatni a kamer�
 \Aref{fig:camera1}. és \aref{fig:camera2}. ábrákon láthatunk egy szobát amelyben a karakterünk van (piros gömb), a fény arra terjed amerre a karakterünk forogna,ellátna.
 Az ajtók ha nyitva vannak a fény továbbterjed a folyosóra.
 
-% TODO: Az árnyékos részen hogyan látszódnak az ellenfelek és a felvehető tárgyak?
+A már előzőlegesen látott területek, látszódnak akkor is ha a karakterünk nem lát rá, annyi különbséggel, hogy az adott területen lévő változók nem változnak számunkra (pl: az adott területen van egy fű típus egy blokkon, amit egy entity letapos, ha a ezt a fű típust akkor láttuk amikor még nem volt eltaposva, akkor úgy is fogjuk látni, amíg nem látunk újra rá), illetve az adott területen áthaladó ellenfeleket se látjuk.
+Az előzőlegesen nem látott területeket, sehogy se látjuk, kivétel ha valamilyen tárggyal felderítjük azt (pl: bájital).
 
-% TODO: A bejárt és a még be nem járt területek között van különbség láthatóság szempontjából?
+% TODO: Az árnyékos részen hogyan látszódnak az ellenfelek és a felvehető tárgyak? -
+
+% TODO: A bejárt és a még be nem járt területek között van különbség láthatóság szempontjából? -
 
 \Section{Irányítás}
 
@@ -417,10 +426,12 @@ A kurzor használatával az adott területre kattintva halad oda a karakter.
 Bizonyos helyezetekben megjelenő gombokra kattintva bizonyos tevékenységek lebonyolítása.
 Egyéb menü/inventory megjelenítés bizonyos gombok segítségével(Esc,I, stb…)
 A már általunk felfedezett területre kattintva karakterünk a lehető leggyorsabb útvonalat választja.
+A mozgás a felengedésre aktiválódik.
+A művelet végrehajtása közben, ha egy új műveletet kezdeményezünk akkor az előzőleges esemény félbeszakad.
 
-% TODO: Az esemény a lenyomásra vagy a felengedésre aktiválódik?
+% TODO: Az esemény a lenyomásra vagy a felengedésre aktiválódik? -
 
-% TODO: Egy műveletet vissza lehet vonni annak végrehajtása közben?
+% TODO: Egy műveletet vissza lehet vonni annak végrehajtása közben? -
 
 \Section{Az interface-n megjelenő gombok}
 
