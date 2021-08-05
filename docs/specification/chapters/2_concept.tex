@@ -2,7 +2,7 @@
 
 \Chapter{Koncepció}
 
-A játék bizonyos játékokbólmár ismert elemeket tartalmaz, ilyen pédául a Pixel Dungeon és Darkest Dungeon-ből már ismert folyosó-szoba kapcsolat, ahol a dungeon több különböző szobából épül fel, amelyeket folyosók kötnek össze. A Darkest Dungeon-nel ellentétbnen, arra törekszünk, hogy a játékos ne legyen lekorlátozva az adott szobára 'combat' közben.
+A játék bizonyos játékokból már ismert elemeket tartalmaz, ilyen pédául a Pixel Dungeon és Darkest Dungeon-ből már ismert folyosó-szoba kapcsolat, ahol a dungeon több különböző szobából épül fel, amelyeket folyosók kötnek össze. A Darkest Dungeon-nel ellentétbnen, arra törekszünk, hogy a játékos ne legyen lekorlátozva az adott szobára 'combat' közben.
 De milyen szempontokból is próbál egyedi lenne a játék? A hangsúly a környezetünk nagyobb bevonása a 'combat' fázisba és a 'combat' átdolgozása olyanannyira hogy elég komplex legyen az ideális lépések megtalálása.
 A játékot röviden, nagyjából összefoglaló folyamatábra amelyben a közelharc szekvenciát részleteztük egy új folyamatábrában a láthatóság kedvéért. Combat folyamatábra (\ref{fig:combat}. ábra).
 
@@ -72,13 +72,52 @@ Ha még nem kezdtünk bele egy játékmenetbe, akkor pedig általunk megadott j�
 
 % TODO: A map-ek szerkezetéről részletesebben írni kellene. Feltételezhetően egy mátrixról van szó, amelynek a celláit itt blokknak nevezzük. Le kellene írni konkrétan az egy-egy blokkhoz tartozó adatokat.
 
+A map szobák és folyosók összesége, ahol a szobák alakjánál törekszünk a négyzet alakú szobák elkerülésére. A folyosók vagy 'I', 'Y' vagy 'L' ...stb alakot követik. A szobákban és a folyosókban bejárható terület egy mátrixhoz hasonló, ahol a celláit blokkoknak nevezzük.
+Minden blokkhoz tartoznak adatok.
+Ezek az adatok:
+\begin{itemize}
+    \item X koordináta (egészérték)
+    \item Y koordináta (egészérték)
+    \item Bejárhatóság (Boolean típusú érték, azt vizsgálja, hogy bejárható az adott blokk)
+    \item Tárgy (intiger típúsú tömb, az adott blokkon lévő tárgyak ID-t tartalmazza)
+    \item Effekt (intiger típúsú tömb, az adott blokkon lévő effektek ID-t tartalmazza)
+    \item Entity (Boolean típusú érték, azt vizsgálja, hogy az adott blokkon van-e Entity)
+\end{itemize}
+
 % TODO: A map-ek közötti kapcsolódási pontokat jobban részletezni kellene, és úgy általában a map-en való mozgást.
+
+A játékmenet egy szobában kezdődik. Amelyeken ajtók vannak. Minden szobából az ajtók egy folyosóra nyílnak. Szobák közötti mozgást a folyósókon való mozgással tehetjük meg.
 
 % TODO: Hogy ha az egymás melleti blokkokra vonatkozóan meg lehet adni valamilyen előírásokat, akkor azt is érdemes részletezni.
 
+Fontosabb kizáró feltételek:
+\begin{itemize}
+    \item Ajtók egymás mellett közvetlenül.
+    \item Folyosóból ne nyíljon ajtó folyosóra.
+    \item Két különböző folyósó ne érjen össze.
+    \item Két ugyanazon célú speciális szoba(Lásd: kovácsműhely) ne legyen egy mapon.
+    \item Egy class ne találhasson olyan eszközöket, amelyeket nem használhat a mapon(ne spawnoljon olyan). Kivétel: Entitykből szerzet felszerelés. (PL.:Harcos ne találjon íjat)
+    \item Zárt szobába ne kerüljön kulcs.
+\end{itemize}
+
 % TODO: Célszerű lehet már most legalább vázlatosan példát adni, hogy egy-egy blokk hogyan fog majd kinézni.
 
+TÁBLÁZAT{hamarosan}
+
 % TODO: Hogy ha a térképnek vannak rétegei, akkor arról is írni kellene.
+
+Rétegek:
+\begin{itemize}
+    \item havas (Minden 5. lépés után tétlenség, hipotermia, hogyha 10 körig nem áll tűz mellett(például: fáklya, tábortűz. Legalább 3körig tűz mellett kell lennie, ahhoz hogy lemenjen. 
+    \item mocsár (Minden 6. lépés után tétlenség)
+    \item füves (nincs semmilyen negatív hatás, vannak növények blokkokon)
+    \item magmás (Minden 5. lépés után tétlenség, hogyha 10 körig legalább 1blokknyi távolságra vagyunk tőle, hőgutát kapunk 4körig(ha elhagytuk a területet utána számítva). 
+\end{itemize}
+A rétegek effectjei:
+\begin{itemize}
+  \item Hipotermia: körönként 1 sebzés, minden 4. kör után 1kört pihen a karakter(tétlen). 10körönként "komolyodik".
+  \item Hőguta:körönként 2sebzés, minden 5. kör után 1kört pihen a karakter(tétlen). Ezt az effektet, el lehet hagyni úgy is, ha valami főzetet használunk.
+\end{itemize}
 
 Általunk előre definiált szobatípusokból generált, de szinthez kötötten meg van adva a minimum generálható szoba és a maximum generálható szoba száma.
 Szinthez kötötten adott típusú és mennyiségű entity.
@@ -87,25 +126,25 @@ A szobákat változó hosszágú folyosók kötik össze.
 Szobatípusok:
 Ezek többnyire mechanikai és grafikai tematikájukban különböznek.
 Alap:
-Ez a szobatípus nem tartalmaz speciális platformokat.Tetszőleges alakú de páros számú fallal rendelkezik(falak csak X vagy Y tengellyel lehetnek párhuzamosak).
+Ez a szobatípus nem tartalmaz speciális blokkokat.Tetszőleges alakú de páros számú fallal rendelkezik(falak csak X vagy Y tengellyel lehetnek párhuzamosak).
 Vizes mocsaras környezet:
-Ez a szobatípus tartalmaz speciális platformokat mint például mocsár(lelassítja a mozgást alapesetben), víz(bizonyos ellenségek vízben jobban mozognak, mint mi alapesetben).
+Ez a szobatípus tartalmaz speciális blokkokat mint például mocsár(lelassítja a mozgást alapesetben), víz(bizonyos ellenségek vízben jobban mozognak, mint mi alapesetben).
 Tetszőleges alakú de páros számú fallal rendelkezik(falak csak X vagy Y tengellyel lehetnek párhuzamosak).
 Kovácsműhely:
-Ebben a szobában nincsenek ellenfelek, tárgyak és ládák. Itt tudunk karakterünkkel különböző itemeket készíteni/fejleszteni. A platform kövezett, fegyverek és páncélok díszítik a falakat. Ezek a szobáknak csak egy ajtajuk van. Tartalmaz egy interaktív térbeli objektumot, amely segítségével tehetjük meg a fent említett tevékenységeket.
-Főzetkészítő szoba: 
-Ebben a szobában nincsenek ellenfelek, tárgyak és ládák. A platform fából készített, ahogyan a falak is. Ezeknek a szobáknak csak egy ajtajuk van. Tartalmaz egy interaktív térbeli objektumot, ami segítségével készíthetünk főzeteket.
+Ebben a szobában nincsenek ellenfelek, tárgyak és ládák. Itt tudunk karakterünkkel különböző itemeket készíteni/fejleszteni. A blokk kövezett, fegyverek és páncélok díszítik a falakat. Ezek a szobáknak csak egy ajtajuk van. Tartalmaz egy interaktív térbeli objektumot, amely segítségével tehetjük meg a fent említett tevékenységeket.
+Főzetkészítő szoba:
+Ebben a szobában nincsenek ellenfelek, tárgyak és ládák. A blokk fából készített, ahogyan a falak is. Ezeknek a szobáknak csak egy ajtajuk van. Tartalmaz egy interaktív térbeli objektumot, ami segítségével készíthetünk főzeteket.
 Csapdaszobák:
 Általában valamilyen ládát tartalmaznak a belsejükben.
-Különböző dizájnú platformok lehetnek, de nem speciálisak. De tartalmazhatnak nagy valószínűséggel csapdákat.
+Különböző dizájnú blokkok lehetnek, de nem speciálisak. De tartalmazhatnak nagy valószínűséggel csapdákat.
 
-A csapdák gyakran nem láthatóak, a játékos a keresés akcióval felderítheti a körülötte lévő platformokon rejtve hagyott csapdákat.
+A csapdák gyakran nem láthatóak, a játékos a keresés akcióval felderítheti a körülötte lévő blokkokon rejtve hagyott csapdákat.
 Minden csapdának más grafikus megjelenése van.
-A csapdák akkor aktiválódnak, ha a platformra lépünk vagy a játékos által egy item kerül eldobásra az adott platformra.
+A csapdák akkor aktiválódnak, ha a blokkra lépünk vagy a játékos által egy item kerül eldobásra az adott blokkra.
 A csapdák rálépésekor különböző főzet effekteket rakhatnak ránk, vagy egyéb speciális akciókat hajtanak végre(hangcsapda, amely a körülöttünk lévő szobákból hozzánk hívja az ellenfeleket).
 A csapdák aktiválása elkerülhető lebegő effekt használatával amely vagy főzet vagy item vagy speciális térelemektől szerezhetőek. Ezek a szobáknak csak egy ajtajuk van. Általában itemet vagy ládát tartalmaznak.
 Titkos szobák:
-Ezeket a szobákat titkos falak vagy zárt ajtók mögött találhatjuk, általában itemet vagy ládát tartalmaz, számuk limitált 5 szintenként 1 ilyen szoba generálódhat le. Pókhálós környezet, néhol hiányzó platform. Ezek a szobáknak csak egy ajtajuk van.
+Ezeket a szobákat titkos falak vagy zárt ajtók mögött találhatjuk, általában itemet vagy ládát tartalmaz, számuk limitált 5 szintenként 1 ilyen szoba generálódhat le. Pókhálós környezet, néhol hiányzó blokk. Ezek a szobáknak csak egy ajtajuk van.
 Mini boss szobák:
 Egyedül a mini boss található meg bennük mint ellenség, ha megtámadjuk akkor viszonozza a támadást. Ez egy egyedi ellenségtípus. Szobán belül nincsenek itemek és térbeli elemek.
 A mini-boss addig alszik amíg nem támadja meg a játékos.
@@ -118,7 +157,7 @@ A szobák formáit akkor láthatjuk, ha nem tartózkodunk benne, ha már voltunk
 
 \Section{Szint}
 
-Karakter alapstatisztikái:
+Karakter alapstátuszok:
 \begin{itemize}
     \item HP:20
     \item Erő:4
@@ -128,9 +167,52 @@ Karakter alapstatisztikái:
 
 % TODO: Ezeket inkább táblázatos formában kellene közölni, és a konkrét számításokat is le kellene írni hozzájuk.
 
+Karakterünk statisztikáit nem csak a státuszok, hanem a felszerelések is befolyásolják.
+
+Bővebb információk itt találhatóak:%\hyperref[subsec:Felszerelesek] {Felszerelések}
+\begin{table}[h]
+\centering
+\caption{Karakterek státuszai!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+ & Vándor & Harcos & Nyilas & Tolvaj & Varázsló \\
+\hline
+HP & 20 & 25 & 20 & 15 & 20 \\
+\hline
+DEF & 4 & 5 & 2 & 3 & 2 \\
+\hline
+STR & 4 & 5 & 3 & 3 & 3 \\
+\hline
+INT & 4 & 3 & 3 & 3 & 5 \\
+\hline
+DEX & 4 & 3 & 5 & 4 & 3 \\
+\hline
+\end{tabular}
+\end{table}
+
 Megölt ellenség után kapunk tapasztalatipontot az alapján, hogy milyen tipusú az ellenség.
 
 % TODO: Be kellene hivatkozni, hogy ez hol kerül majd részletezésre.
+
+\begin{table}[h]
+\centering
+\caption{Ellenfelek alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & No. 1 entity & No. 2 entity & No. 3 entity & No. 4 entity  \\
+\hline
+EXP & 5 & 3 & 4 & 4 \\
+\hline
+HP & 1 & 2 & 5 & 4 \\
+\hline
+ATK & 10 & 5 & 3 & 3 \\
+\hline
+DEF & 0 & 3 & 4 & 2 \\
+\hline
+\end{tabular}
+\end{table}
 
 Valahányszor amikor karakterünk szintet lép, kapunk 1 pontot.
 
@@ -144,19 +226,27 @@ A karakter ablakon belül 4 lehetőség van, amelyek közül választhatunk mit 
     \item Ügyesség: Erősíti a Íjjal való támadásainkat.
 \end{itemize}
 
-Minden következő szint több entity megölését igényli.
-Minden vitalitáspont +2 életerőt ad.
+\noindent Minden következő szint több entity megölését igényli.
 
-Minden "ellenség" entity, de nem minden entity ellenséges.
+\noindent Minden vitalitáspont +2 életerőt ad.
+
+\noindent Minden "ellenség" entity, de nem minden entity ellenséges.
 
 % TODO: Az ellenség és az entity ugyanazt jelentené? (Ezt pontosítani kellene.) -
 
-Minden erőpont +2 növeli a fizikai támadásainkat.
-Minden intelligenciapont +1-el növeli a mágikus támadásainkat.
+\noindent Minden erőpont +2 növeli a fizikai támadásainkat.
 
-Minden ügyességpont +1-el növeli a íjjal való támadásainkat.
+\noindent A Harcos +5 támadó értéket kap minden pontért amit Strength-re költött a játékos.
 
-Minden stat 5-ször fejleszthető.
+\noindent Minden intelligenciapont +1-el növeli a mágikus támadásainkat.
+
+\noindent A Varázsló +5 mágikus támadó értéket kap intelligenciapontonként.
+
+\noindent Minden ügyességpont +1-el növeli a íjjal való támadásainkat.
+
+\noindent A Tolvaj kitérése nő +10\%-al minden egyes pont után, az archer támadó értéke +5-el nő.
+
+\noindent Minden státuszt maximum 10-es szintig lehet húzni.
 
 \Section{Combat}
 
@@ -172,14 +262,18 @@ Kezdeményezéstől függően dől el ki fogja elkezdeni a harcot, innentől kez
 
 % TODO: Érdemes lehet kisebb számítási példákat mutatni az általános leírás mellett.
 
+Pl.:Az ellenfél köre kezdődik a csatában és belénk ütne 5-öt, először eldől hogy a karakterünk kitér, ha kitért 0 sebzést kap vége a körnek, ha nem megnézzük karakterünk védelmét az legyen ebben az esetben 2 a védelem kivonódik a támadás értékéből és 3 egység levonódik karakterünk életerejéből a körnek vége.
+
 Ha a menekülést választjuk és sikerült továbblépnünk a következő szintre anélkül hogy az ellenfél elkapott volna, az üldöző nem tud tovább lépni a következő szintre.
 
 \SubSection{Ranged combat}
-
 % TODO: A távolságszámítás ez esetben hogyan történik?
 
-Adott távolságon belül, adott támadással.
-Karakterünk alapfelszerelésében található 10db nyilvessző, inventory helyén kívül a jobb alsó sarokban kapott egy saját gombot aminek rákattintásával 1db nyílvesszőt eldobhatunk arra amerre célzunk az így okozott sebzés nem lehet több 2-nél alapesetben.
+Alapesetben karakterünk csak függőleges és vízszíntesen tud lőni átlósan nem lehet. A távolság függ a használt fegyver minőségétől, [3;8] intervallumon belül lehetséges, bővebben a %\hyperref[subsec:Felszerelesek] {Felszereléseknél}.
+Hamár előzőlegesen kijelöltük a távolsági fegyverünket, akkor egy velünk függőleges vagy vízszintes blockot kijelölünk karakterünk abba az irányba fog lőni.
+A nyilak nem hatolnak át az egységeken azaz nem haladnak tovább az első eltalált ellenség után.
+A mágikus lövedékek áthaladhatnak az Entityken, ha rajtuk túl mutatnak. Ilyenkor Az első találat teljes sebzést, soron következőek fele annyit szenvednek el. (Pl.: az első 4sebzést szenved el, a második 4-nek a felét, 2-t. A harmadik 2-nek a felét, 1-et.)
+Semmilyen lövedék nem halad át falakon, zárt ajtókon, térbeli objektumokon se.
 
 % TODO: A grafikus megjelenítést és a mögötte lévő modellt nem érdemes keverni. Tipikusan először a modellt, majd annak reprezentációját érdemes bemutatni.
 
@@ -193,6 +287,7 @@ Karakterünk alapfelszerelésében található 10db nyilvessző, inventory hely�
 \Section{Entity}
 
 Egy blokk-on csak egy darab entity lehet, nem lehet rajtuk átmenni.
+A játékon belül minden pozició intiger típussal van megadva.
 
 % TODO: A platform itt most egy blokkot jelentene? -
 
@@ -245,7 +340,7 @@ Ajtók: Karakterünk vagy egyéb entity-k az ajtó poziciójára lépnek akkor a
 \item
 Zárt ajtók: Rákattintunk és a karakterünk a közvetlen közelébe megy és van nálunk hozzá megfelelő kulcsunk akkor a karakterünk egy körért cserébe eltávolítja a zárt az ajtóról, ezek után sima ajtóként funkcionál.
 \item
-Kovácsműhely: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. A szerzett alapanyagok segítségével tudjuk továbbfejleszteni a már meglévő felszereléseinket. Egy körbe kerül.
+Kovácsműhely: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. A felugró ablakon különböző akciókat hajhatunk végre. A szerzett alapanyagok segítségével tudjuk továbbfejleszteni a már meglévő felszereléseinket. Egy körbe kerül.
 
 % TODO: A felugró ablakokról, és úgy általában a widget-ek kezeléséről érdemes részletesebben írni.
 
@@ -254,17 +349,19 @@ Félkarú rabló: Rákattintunk és a karakterünk a közvetlen közelébe megy,
 
 % TODO: Ennek megjelenítéséről érdemes lenne még írni, ábrát készíteni hozzá.
 
+ábra{HAMAROSAN}
+
 % TODO: A valószínűségeket konkretizálni kellene.
 
 \item
-Főzetfőző állomány: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. Az általunk birtokolt növényi alapanyagok használatával véletlenszerű fözetet készíthetünk, legalább 3 alapanyag szükséges hozzá.
+Főzetfőző állomány: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele és megnyílik egy felugró ablak. Az általunk birtokolt növényi alapanyagok használatával fözetet készíthetünk, legalább 3 alapanyag szükséges hozzá. Az alapanyogtól függően van esély valamilyen típúsú főzet elkészítésére. Úgy működik, hogy: 3 alapanyagból, "a gép kihúz" egyet és amilyen az alapanyag, olyan lesz a főzet is. Lehet több ugyanolyan alapanyagot haszálni, ilyenkor nyílvánvalóan több esélyünk lesz az adott alapanyag "kihúzására". Hogyha 3 ugyanolyan alapanyagot használunk, akkor +40\%-kal hatékonyabb vagy hosszabb(főzettől függő).
 
 % TODO: A véletlenszerű főzet itt bármi lehet, vagy függ egyéb tényezőtől is?
 
 \item
 Ércek: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk egy körért cserébe eltünteti a közvetlen közelünkben lévő ércet és kapunk egy alapanyagot.
 \item
-Láda: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele. A láda ezekután eltünik és egy tárgyat hagy hátra.
+Láda: Rákattintunk és a karakterünk a közvetlen közelébe megy, ha odaértünk akkor karakterünk interaktál vele. A láda ezekután eltünik és egy tárgyat hagy hátra. Egy loot table-ben megadott tárgyak közül sorsolja ki, hogy milyen tárgyat hagy hátra. (később: táblázat)
 
 % TODO: Az, hogy milyen tárgy, az mitől függ?
 
@@ -285,16 +382,16 @@ A tárgyak amelyeket nem veszünk fel a játék végéig ott maradnak.
 Minden entity más itemet hagyhat maga után.
 Bizonyos térbeli elemek is adhatnak különböző itemeket.
 
-Minden entitynek van egy loot táblája amiben elő van írva, hogy milyen tárgyat hagyhat maga után milyen százalékos eséllyel. 
+Minden entitynek van egy loot táblája, amiben elő van írva, hogy milyen tárgyat hagyhat maga után milyen százalékos eséllyel.
 
 % TODO: Az, hogy milyen tárgyakat hagynak hátra, az mitől függ? -
 
 Bizonyos ládák illetve ajtók kulcsot, igényelhetnek.
-Bármely entity dobhat \%-os eséllyel [20, 70] intervallumon belüli aranyat, amit félkarú rablóknál lehet elkölteni felszerelések fejlesztésére.
+Bármely entity dobhat aranyat, amelyet normális eloszlású RNG sorsol ki [20;70] intervallumon belül. Amit félkarú rablóknál is lehet elkölteni felszerelések fejlesztésére.
 
 % TODO: A [20, 70] intervallumon belül hogy kerül meghatározásra az érték? -
 
-Néhány alap szoba, folyosó platformjainak felét fű borítja amelynek letaposásából \%-os eséllyel kaphatunk magvakat amiket el lehet ültetni ezzel csapdát állítva ellenfeleknek illetve szemgolyókat amik 1 életerőt gyógyítanak.
+Néhány alap szoba, folyosó blokkjainak felét fű borítja amelynek letaposásából \%-os eséllyel kaphatunk magvakat amiket el lehet ültetni ezzel csapdát állítva ellenfeleknek illetve szemgolyókat amik 1 életerőt gyógyítanak.
 
 Alapfelszerelésen kívül minden felszerelés amit lootolunk számunkra ismeretlen felvételükkor 10 körig nem lehet levenni őket és a körök lejárta után pozitív vagy negatív effektet adnak.
 
@@ -302,7 +399,7 @@ Szemgolyókon kívül minden item amit lootolhatunk hatásuk számunkra ismeretl
 
 \Section{Itemek}
 
-Az itemek a földről úgy vehetőek fel, hogy karakterünk arra a blokkra lép ahol az item található, ekkor megjelenik egy gomb amely rákattintásakor felveszi az itemet hogyha van hely az inventorynkban.
+Az itemek a földről úgy vehetőek fel, hogy karakterünk arra a blokkra lép ahol az item található, ekkor megjelenik egy gomb amely rákattintásakor felveszi az itemet hogyha van hely az inventorynkban. Ha nincs hely, akkor mag a gomb szürkésebb. Ez a gomb a távolsági fegyver használati gombtól közvetlenül balra helykezedik el. Octagon alakú.
 
 % TODO: Ezt a gombot is, mint widget-et részletezni kellene.
 
@@ -322,20 +419,128 @@ Fegyverek, Armorok.
 Bizonyos stat növelők (Főzetek).
 Minden tárgynak, amelyet Entitykből vagy térbeli objektumokból szerezhetőek meg, nem fix esélyű tárgyak.
 
+\SubSection{Felszerelések}
+%\label {subsec:Felszerelesek}
+
+Felszerelésnek tekintjük az olyan állandó item-eket amelyeket fel lehet rakni karakterünkre.
+
+Három altípusát különböztetjük meg a felszereléseknek:
+\begin{itemize}
+  \item Fegyverek
+  \item Páncélok
+  \item Ékszerek
+\end{itemize}
+
+Fegyverek feloszlanak 4 alkategóriára:
+\begin{itemize}
+  \item Kardok
+  \item Íjak
+  \item Varázsbotok
+  \item Tőrök
+\end{itemize}
+
+Minden fegyver rendelkezik az alapvető támadó értéken kívül egy státusszal amely a ritkaságától függően eltérően ad %-osan támadóértéket.
+
+Tehát karakterünk teljes támadóértékét a következőképpen tudjuk kiszámítani: 
+
+(BASE ATK+STRENGTH ATK+ITEM ATK)*WEAPON ATK percent=TOTAL ATK
+
+A kapott érték alsó egészrészét vesszük minden alkalommal.
+
+Ez a fajta számítás mind ékszereknél mind páncéloknál hasonlóan működik a különség csak  statisztákban van.
+
+Fegyverek:
+\begin{itemize}
+  \item fegyver1
+  \item fegyver2
+  \item fegyver3
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\caption{Fegyverek alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & No. 1 entity & No. 2 entity & No. 3 entity & No. 4 entity  \\
+\hline
+EXP & 5 & 3 & 4 & 4 \\
+\hline
+HP & 1 & 2 & 5 & 4 \\
+\hline
+ATK & 5 & 1 & 2 & 3 \\
+\hline
+DEF & 0 & 3 & 4 & 2 \\
+\hline
+\end{tabular}
+\end{table}
+
+Péncélok alapstátusza:HP% alapstatisztikája:védelem
+
+Páncélok:
+
+\begin{itemize}
+  \item páncél1
+  \item páncél2
+  \item páncél3
+\end{itemize}
+
+
+
+\noindent Ékszerekből maximum 2-őt tud hordani karakterünk.
+
+4 fajtáját különböztetjük meg:
+
+\begin{itemize}
+  \item Gyűrűk
+  \item Karkötők
+  \item Nyakláncok
+  \item Fülbevalók
+\end{itemize}
+
+\noindent Gyűrűk ATK\%-ot,Karkötők HP\%,Nyakláncok Crit rate\%,Fülbevalók Dodge\%-et adhatnak.
+
+Ékszerek:
+
+\begin{itemize}
+  \item ékszer1
+  \item ékszer2
+  \item ékszer3
+\end{itemize}
+\begin{table}[h]
+\centering
+\caption{Ékszerek alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & No. 1 entity & No. 2 entity & No. 3 entity & No. 4 entity  \\
+\hline
+EXP & 5 & 3 & 4 & 4 \\
+\hline
+HP & 1 & 2 & 5 & 4 \\
+\hline
+ATK & 5 & 1 & 2 & 3 \\
+\hline
+DEF & 0 & 3 & 4 & 2 \\
+\hline
+\end{tabular}
+\end{table}
+
+
 \SubSection{Kulcsok}
 
 Minden mapon annyi kulcs spawnol, véletlenszerűen a szobák egyikébe amennyi kulcs\-csal zárt ajtó generálódott a mapra.
-Kulcsok csak nyitott szobákba kerülnek generáláskor, így gátolva az esetleges 'lehetetlen' helyzeteket.
+Kulcsok csak nyitott szobákba kerülnek generáláskor, így gátolva az esetleges 'lehetetlen' helyzeteket. Egy kizáró feltétel akadályozza meg.
 % TODO: Itt hogyan garantálható, hogy egy szoba kulcsa ne abba a szobába kerüljön, amelyikkel be van zárva?
 
 Láda Kulcsok:
 Máshogy néznek ki grafikailag, mint a sima kulcs és külön vannak tárolva tőlük. Ezek a kulcsok a zárt ládák kinyitására használhatóak.
-A Játékos felvételekor tisztában van azzal hogy az adott kulcsnak mi a szerepe, a nevéből és a leírásából.
+A Játékos felvételekor tisztában van azzal hogy az adott kulcsnak mi a szerepe, a nevéből és a leírásából kifolyólag.
 % TODO: Érdemes lehet ezeket láda kulcsoknak hívni.
 
 % TODO: A játékos tudja, hogy a felvett kulcs az ajtót vagy ládát nyit?
 
-Ha a mapon van zárt láda, mindig 2 van vízszintesen és függőlegesen is legalább 1 blokk távolságra és maximum 2 blokk távolságra. És a mapra mindig csak 1 kulcs kerül hozzá.
+Ha a mapon van zárt láda, mindig 2 van vízszintesen és függőlegesen is legalább 1 blokknyi távolságra és maximum 2 blokknyi távolságra. És a mapra mindig csak 1 kulcs kerül hozzá.
 
 % TODO: A közel itt mit jelent pontosan?
 
@@ -357,9 +562,9 @@ Mindenfajta magvat el lehet dobni ilyenkor a magból kikelt növény hatása a h
 Magvak típusai:
 
 \begin{itemize}
-\item borotva: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami az elültetés helyétől körben 1 platformnyi távolságra 3-at sebez az aktiválás utáni első körben.
-\item gyógyító: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 platformnyi távolságra 3-at gyógyít az aktiválás utáni első körben.
-\item mérgező: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 platformnyi távolságra méreg effektet rak az egységre amely 2 körön keresztül sebez 2-őt.
+\item borotva: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami az elültetés helyétől körben 1 blokknyi távolságra 3-at sebez az aktiválás utáni első körben.
+\item gyógyító: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 blokknyi távolságra 3-at gyógyít az aktiválás utáni első körben.
+\item mérgező: Eltiprásakor(rálépésekor) aktiválódik a hatása, ami elültetés helyétől körben 1 blokknyi távolságra méreg effektet rak az egységre amely 2 körön keresztül sebez 2-őt.
 \end{itemize}
 
 % TODO: A sebzés és gyógyítás kiértékelési sorrendjét érdemes vizsgálni!
@@ -414,7 +619,7 @@ A bal egérgomb letartásával és egér mozgatásával tudjuk mozgatni a kamer�
 Az ajtók ha nyitva vannak a fény továbbterjed a folyosóra.
 
 A már előzőlegesen látott területek, látszódnak akkor is ha a karakterünk nem lát rá, annyi különbséggel, hogy az adott területen lévő változók nem változnak számunkra (pl: az adott területen van egy fű típus egy blokkon, amit egy entity letapos, ha a ezt a fű típust akkor láttuk amikor még nem volt eltaposva, akkor úgy is fogjuk látni, amíg nem látunk újra rá), illetve az adott területen áthaladó ellenfeleket se látjuk.
-Az előzőlegesen nem látott területeket, sehogy se látjuk, kivétel ha valamilyen tárggyal felderítjük azt (pl: bájital).
+Az előzőlegesen nem látott területeket, sehogy se látjuk, kivétel ha valamilyen tárggyal felderítjük azt (pl: főzet).
 
 % TODO: Az árnyékos részen hogyan látszódnak az ellenfelek és a felvehető tárgyak? -
 
@@ -427,7 +632,7 @@ Bizonyos helyezetekben megjelenő gombokra kattintva bizonyos tevékenységek le
 Egyéb menü/inventory megjelenítés bizonyos gombok segítségével(Esc,I, stb…)
 A már általunk felfedezett területre kattintva karakterünk a lehető leggyorsabb útvonalat választja.
 A mozgás a felengedésre aktiválódik.
-A művelet végrehajtása közben, ha egy új műveletet kezdeményezünk akkor az előzőleges esemény félbeszakad.
+A művelet végrehajtása közben, ha egy új műveletet kezdeményezünk akkor az előzőleges esemény félbeszakad abban a pillanatban, amikor felengedjük a gombot.
 
 % TODO: Az esemény a lenyomásra vagy a felengedésre aktiválódik? -
 
