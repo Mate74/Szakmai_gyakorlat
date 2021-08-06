@@ -172,21 +172,25 @@ Karakterünk statisztikáit nem csak a státuszok, hanem a felszerelések is bef
 Bővebb információk itt találhatóak:%\hyperref[subsec:Felszerelesek] {Felszerelések}
 \begin{table}[h]
 \centering
-\caption{Karakterek státuszai!}
+\caption{Osztályok!}
 \label{tab:minta}
 \begin{tabular}{|l|c|c|c|c|c|}
 \hline
- & Vándor & Harcos & Nyilas & Tolvaj & Varázsló \\
+ & Vándor & Harcos & Nyilas & Tolvaj & Varázsló \
 \hline
-HP & 20 & 25 & 20 & 15 & 20 \\
+STR & 3 & 5 & 3 & 3 & 3 \
 \hline
-DEF & 4 & 5 & 2 & 3 & 2 \\
+INT & 2 & 3 & 3 & 3 & 5 \
 \hline
-STR & 4 & 5 & 3 & 3 & 3 \\
+DEX & 2 & 3 & 5 & 5 & 3 \
 \hline
-INT & 4 & 3 & 3 & 3 & 5 \\
+HP & 20 & 25 & 20 & 15 & 20 \
 \hline
-DEX & 4 & 3 & 5 & 4 & 3 \\
+DEF & 2 & 5 & 2 & 3 & 2 \
+\hline
+Weapons & Minden & Kard & Íj & Tőr & Varázsbot \
+\hline
+Armour & Minden & Acél & Bőr & lánc & Szövet \
 \hline
 \end{tabular}
 \end{table}
@@ -441,7 +445,7 @@ Fegyverek feloszlanak 4 alkategóriára:
 
 Minden fegyver rendelkezik az alapvető támadó értéken kívül egy státusszal amely a ritkaságától függően eltérően ad %-osan támadóértéket.
 
-Tehát karakterünk teljes támadóértékét a következőképpen tudjuk kiszámítani: 
+Tehát karakterünk teljes támadóértékét a következőképpen tudjuk kiszámítani:
 
 (BASE ATK+STRENGTH ATK+ITEM ATK)*WEAPON ATK percent=TOTAL ATK
 
@@ -454,28 +458,79 @@ Fegyverek:
   \item fegyver1
   \item fegyver2
   \item fegyver3
+  \item fegyver4
+  \item fegyver5
+  \item fegyver6
+  \item fegyver7
+  \item fegyver8
+  \item fegyver9
+  \item fegyver10
+  \item fegyver11
+  \item fegyver12
 \end{itemize}
+\newpage
+Ritkaság alapján:
 
 \begin{table}[h]
 \centering
-\caption{Fegyverek alapstatisztikái!}
+\caption{Átlagos Fegyverek alapstatisztikái!}
 \label{tab:minta}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
- & No. 1 entity & No. 2 entity & No. 3 entity & No. 4 entity  \\
+ & fegyver1 & fegyver2 & fegyver3 & fegyver4 \\
 \hline
-EXP & 5 & 3 & 4 & 4 \\
+Típus & Tőr & Kard & Varázsbot & Íj  \\
 \hline
-HP & 1 & 2 & 5 & 4 \\
+Alap támadóérték & 3 & 3 & 3 & 3 \\
 \hline
-ATK & 5 & 1 & 2 & 3 \\
+Hatótáv & 1 & 1 & 3 & 3 \\
 \hline
-DEF & 0 & 3 & 4 & 2 \\
+Támadás\% & 5 & 5 & 5 & 5 \\
 \hline
 \end{tabular}
 \end{table}
 
-Péncélok alapstátusza:HP% alapstatisztikája:védelem
+\begin{table}[h]
+\centering
+\caption{Ritka Fegyverek alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & fegyver5 & fegyver6 & fegyver7 & fegyver8   \\
+\hline
+Típus & Tőr & Kard & Varázsbot & Íj  \\
+\hline
+Alap támadóérték & 5 & 5 & 5 & 5  \\
+\hline
+Hatótáv & 1 & 1 & 5 & 5 \\
+\hline
+Támadás\% & 10 & 10 & 10 & 10\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Legendás Fegyverek alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & fegyver9 & fegyver10 & fegyver11 & fegyver12  \\
+\hline
+Típus & Tőr & Kard & Varázsbot & Íj\\
+\hline
+Alap támadóérték & 10 & 10 & 10 & 10 \\
+\hline
+Hatótáv & 1 & 1 & 8 & 8 \\
+\hline
+Támadás\% & 20 & 20 & 20 & 20 \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+Péncélok alapstátusza:HP\% alapstatisztikája:védelem
 
 Páncélok:
 
@@ -483,10 +538,69 @@ Páncélok:
   \item páncél1
   \item páncél2
   \item páncél3
+  \item páncél4
+  \item páncél5
+  \item páncél6
+  \item páncél7
+  \item páncél8
+  \item páncél9
+  \item páncél10
+  \item páncél11
+  \item páncél12
 \end{itemize}
 
+\begin{table}[h]
+\centering
+\caption{Átlagos Páncélok alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & páncél1 & páncél2 & páncél3 & páncél4  \\
+\hline
+Típus & Acél & Bőr & Lánc & Szövet\\
+\hline
+Védelem & 10 & 10 & 10 & 10 \\
+\hline
+Életerő\% & 5 & 5 & 5 & 5 \\
+\hline
+\end{tabular}
+\end{table}
 
+\begin{table}[h]
+\centering
+\caption{Ritka Páncélok alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & páncél5 & páncél6 & páncél7 & páncél8  \\
+\hline
+Típus & Acél & Bőr & Lánc & Szövet\\
+\hline
+Védelem & 15 & 15 & 15 & 15 \\
+\hline
+Életerő\% & 10 & 10 & 10 & 10 \\
+\hline
+\end{tabular}
+\end{table}
 
+\begin{table}[h]
+\centering
+\caption{Legendás Páncélok alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & páncél1 & páncél2 & páncél3 & páncél4  \\
+\hline
+Típus & Acél & Bőr & Lánc & Szövet\\
+\hline
+Védelem & 25 & 25 & 25 & 25 \\
+\hline
+Életerő\% & 20 & 20 & 20 & 20 \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
 \noindent Ékszerekből maximum 2-őt tud hordani karakterünk.
 
 4 fajtáját különböztetjük meg:
@@ -503,29 +617,86 @@ Páncélok:
 Ékszerek:
 
 \begin{itemize}
-  \item ékszer1
-  \item ékszer2
-  \item ékszer3
+ \item Gyűrű1
+ \item Gyűrű2
+ \item Gyűrű3
+ \item Gyűrű4
+ \item Karkötő1
+ \item Karkötő2
+ \item Karkötő3
+ \item Karkötő4
+ \item Nyaklánc1
+ \item Nyaklánc2
+ \item Nyaklánc3
+ \item Nyaklánc4
+ \item Fülbevaló1
+ \item Fülbevaló2
+ \item Fülbevaló3
+ \item Fülbevaló4
 \end{itemize}
+\newpage
+Típus alapján:
+
 \begin{table}[h]
 \centering
-\caption{Ékszerek alapstatisztikái!}
+\caption{Gyűrűk alapstatisztikái!}
 \label{tab:minta}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
- & No. 1 entity & No. 2 entity & No. 3 entity & No. 4 entity  \\
+ & Gyűrű1 & Gyűrű2 & Gyűrű3 & Gyűrű4  \\
 \hline
-EXP & 5 & 3 & 4 & 4 \\
+Ritkaság & Áltagos & Ritka & Epik & Legendás\\
 \hline
-HP & 1 & 2 & 5 & 4 \\
-\hline
-ATK & 5 & 1 & 2 & 3 \\
-\hline
-DEF & 0 & 3 & 4 & 2 \\
+Kritikus találat\% & 5 & 10 & 15 & 20 \\
 \hline
 \end{tabular}
 \end{table}
 
+\begin{table}[h]
+\centering
+\caption{Karkötők alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & Karkötő1 & Karkötő2 & Karkötő3 & Karkötő4  \\
+\hline
+Ritkaság & Áltagos & Ritka & Epikus & Legendás\\
+\hline
+Kitérés\% & 5 & 10 & 15 & 20 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Nyakláncok alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & Nyaklánc1 & Nyaklánc2 & Nyaklánc3 & Nyaklánc4  \\
+\hline
+Ritkaság & Áltagos & Ritka & Epikus & Legendás\\
+\hline
+Védelem\% & 5 & 10 & 15 & 20 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Fülbevalók alapstatisztikái!}
+\label{tab:minta}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & Fülbevaló1 & Fülbevaló2 & Fülbevaló3 & Fülbevaló4  \\
+\hline
+Ritkaság & Áltagos & Ritka & Epikus & Legendás\\
+\hline
+Életerő\% & 5 & 10 & 15 & 20 \\
+\hline
+\end{tabular}
+\end{table}
+\newpage
 
 \SubSection{Kulcsok}
 
