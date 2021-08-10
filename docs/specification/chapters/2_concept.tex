@@ -79,8 +79,8 @@ Ezek az adatok:
     \item X koordináta (egészérték)
     \item Y koordináta (egészérték)
     \item Bejárhatóság (Boolean típusú érték, azt vizsgálja, hogy bejárható az adott blokk)
-    \item Tárgy (intiger típúsú tömb, az adott blokkon lévő tárgyak ID-t tartalmazza)
-    \item Effekt (intiger típúsú tömb, az adott blokkon lévő effektek ID-t tartalmazza)
+    \item Tárgy (integer típusú tömb, az adott blokkon lévő tárgyak ID-ját tartalmazza)
+    \item Effekt (integer típusú tömb, az adott blokkon lévő effektek ID-ját tartalmazza)
     \item Entity (Boolean típusú érték, azt vizsgálja, hogy az adott blokkon van-e Entity)
 \end{itemize}
 
@@ -106,7 +106,7 @@ TÁBLÁZAT{hamarosan}
 
 % TODO: Hogy ha a térképnek vannak rétegei, akkor arról is írni kellene.
 
-Rétegek:
+Map típusok:
 \begin{itemize}
     \item havas (Minden 5. lépés után tétlenség, hipotermia, hogyha 10 körig nem áll tűz mellett(például: fáklya, tábortűz. Legalább 3körig tűz mellett kell lennie, ahhoz hogy lemenjen. 
     \item mocsár (Minden 6. lépés után tétlenség)
@@ -157,17 +157,45 @@ A szobák formáit akkor láthatjuk, ha nem tartózkodunk benne, ha már voltunk
 
 \Section{Szint}
 
-Karakter alapstátuszok:
+Valahányszor amikor karakterünk szintet lép, kapunk 1 pontot.
+
+A második szint eléréséhez 20 tapasztalatipont minden következő szinthez +5 tapasztalatipont elérése szükséges az előző szinthez képest.
+
+A karakter ablakon belül 4 lehetőség van, amelyek közül választhatunk mit fejleszthetjük tovább:
 \begin{itemize}
-    \item HP:20
-    \item Erő:4
-    \item Intelligencia:3
-    \item Ügyesség:3
+    \item Vitalitás: Megnöveli a maximális életerőnket.
+    \item Erő: Erősíti a fizikai támadásokat.
+    \item Intelligencia: Erősíti a mágikus támadásokat.
+    \item Ügyesség: Erősíti a Íjjal való támadásainkat.
 \end{itemize}
+
+\noindent Minden következő szint több entity megölését igényli.
+
+\noindent Minden vitalitáspont +2 életerőt ad.
+
+\noindent Minden "ellenség" entity, de nem minden entity ellenséges.
+
+% TODO: Az ellenség és az entity ugyanazt jelentené? (Ezt pontosítani kellene.) -
+
+\noindent Minden erőpont +2 növeli a fizikai támadásainkat.
+
+\noindent A Harcos +5 támadó értéket kap minden pontért amit Strength-re költött a játékos.
+
+\noindent Minden intelligenciapont +1-el növeli a mágikus támadásainkat.
+
+\noindent A Varázsló +5 mágikus támadó értéket kap intelligenciapontonként.
+
+\noindent Minden ügyességpont +1-el növeli a íjjal való támadásainkat.
+
+\noindent A Tolvaj kitérése nő +10\%-al minden egyes pont után, az archer támadó értéke +5-el nő.
+
+\noindent Minden státuszt maximum 10-es szintig lehet húzni.
 
 % TODO: Ezeket inkább táblázatos formában kellene közölni, és a konkrét számításokat is le kellene írni hozzájuk.
 
 Karakterünk statisztikáit nem csak a státuszok, hanem a felszerelések is befolyásolják.
+
+Minden statisztika minden karakternek más előnyöket ad. Később részletezés. 
 
 Bővebb információk itt találhatóak:%\hyperref[subsec:Felszerelesek] {Felszerelések}
 \begin{table}[h]
@@ -217,40 +245,6 @@ DEF & 0 & 3 & 4 & 2 \\
 \hline
 \end{tabular}
 \end{table}
-
-Valahányszor amikor karakterünk szintet lép, kapunk 1 pontot.
-
-A második szint eléréséhez 20 tapasztalatipont minden következő szinthez +5 tapasztalatipont elérése szükséges az előző szinthez képest.
-
-A karakter ablakon belül 4 lehetőség van, amelyek közül választhatunk mit fejleszthetjük tovább:
-\begin{itemize}
-    \item Vitalitás: Megnöveli a maximális életerőnket.
-    \item Erő: Erősíti a fizikai támadásokat.
-    \item Intelligencia: Erősíti a mágikus támadásokat.
-    \item Ügyesség: Erősíti a Íjjal való támadásainkat.
-\end{itemize}
-
-\noindent Minden következő szint több entity megölését igényli.
-
-\noindent Minden vitalitáspont +2 életerőt ad.
-
-\noindent Minden "ellenség" entity, de nem minden entity ellenséges.
-
-% TODO: Az ellenség és az entity ugyanazt jelentené? (Ezt pontosítani kellene.) -
-
-\noindent Minden erőpont +2 növeli a fizikai támadásainkat.
-
-\noindent A Harcos +5 támadó értéket kap minden pontért amit Strength-re költött a játékos.
-
-\noindent Minden intelligenciapont +1-el növeli a mágikus támadásainkat.
-
-\noindent A Varázsló +5 mágikus támadó értéket kap intelligenciapontonként.
-
-\noindent Minden ügyességpont +1-el növeli a íjjal való támadásainkat.
-
-\noindent A Tolvaj kitérése nő +10\%-al minden egyes pont után, az archer támadó értéke +5-el nő.
-
-\noindent Minden státuszt maximum 10-es szintig lehet húzni.
 
 \Section{Combat}
 
