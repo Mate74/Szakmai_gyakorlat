@@ -166,7 +166,7 @@ A karakter ablakon belül 4 lehetőség van, amelyek közül választhatunk mit 
     \item Vitalitás: Megnöveli a maximális életerőnket.
     \item Erő: Erősíti a fizikai támadásokat.
     \item Intelligencia: Erősíti a mágikus támadásokat.
-    \item Ügyesség: Erősíti a Íjjal való támadásainkat.
+    \item Ügyesség: Erősíti az Íjjal való támadásainkat.
 \end{itemize}
 
 \noindent Minden következő szint több entity megölését igényli.
@@ -445,156 +445,124 @@ Tehát karakterünk teljes támadóértékét a következőképpen tudjuk kiszá
 
 A kapott érték alsó egészrészét vesszük minden alkalommal.
 
-Ez a fajta számítás mind ékszereknél mind páncéloknál hasonlóan működik a különség csak  statisztákban van.
+Ez a fajta számítás mind ékszereknél mind páncéloknál hasonlóan működik, a különbség csak statisztikákban van.
 
-Fegyverek:
-\begin{itemize}
-  \item fegyver1
-  \item fegyver2
-  \item fegyver3
-  \item fegyver4
-  \item fegyver5
-  \item fegyver6
-  \item fegyver7
-  \item fegyver8
-  \item fegyver9
-  \item fegyver10
-  \item fegyver11
-  \item fegyver12
-\end{itemize}
-\newpage
-Ritkaság alapján:
-
-\begin{table}[h]
+Felszerelések looting table-jei(Ritkaság alapján)
+\begin{table}[H]
 \centering
-\caption{Átlagos Fegyverek alapstatisztikái!}
+\caption{Fegyverek Looting table-je}
 \label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
+\tabcolsep=0.11cm
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
 \hline
- & fegyver1 & fegyver2 & fegyver3 & fegyver4 \\
+ Name & Drop & From & Rarity & Type & Base ATK & Range & Bonus ATK(\%) \\
 \hline
-Típus & Tőr & Kard & Varázsbot & Íj  \\
+ fegyver1 & 15\% & 1.Entity & Átlagos & Tőr & 3 & 1 & 5 \\
 \hline
-Alap támadóérték & 3 & 3 & 3 & 3 \\
+ fegyver2 & 15\% & 2.Entity & Átlagos & Kard & 3 & 1 & 5 \\
 \hline
-Hatótáv & 1 & 1 & 3 & 3 \\
+ fegyver3 & 15\% & 3.Entity & Átlagos & Varázsbot & 3 & 3 & 5\\
 \hline
-Támadás\% & 5 & 5 & 5 & 5 \\
+ fegyver4 & 15\% & 4.Entity & Átlagos  & Íj & 3 & 3 & 5\\
+\hline
+ fegyver5 & 7\% & 1.Entity & Ritka & Tőr & 5 & 1 & 10 \\
+\hline
+ fegyver6 & 7\% & 2.Entity & Ritka & Kard & 5 & 1 & 10 \\
+\hline
+ fegyver7 & 7\% & 3.Entity & Ritka & Varázsbot & 5 & 5 & 10\\
+\hline
+ fegyver8 & 7\% & 4.Entity & Ritka  & Íj & 5 & 5 & 10\\
+\hline
+ fegyver9 & 3\% & 1.Entity & Legendás & Tőr & 10 & 1 & 20 \\
+\hline
+ fegyver10 & 3\% & 2.Entity & Legendás & Kard & 10 & 1 & 20 \\
+\hline
+ fegyver11 & 3\% & 3.Entity & Legendás & Varázsbot & 10 & 8 & 20\\
+\hline
+ fegyver12 & 3\% & 4.Entity & Legendás  & Íj & 10 & 8 & 20\\
 \hline
 \end{tabular}
 \end{table}
-
-\begin{table}[h]
+\tabcolsep=0.11cm
+\begin{table}[H]
 \centering
-\caption{Ritka Fegyverek alapstatisztikái!}
+\caption{Páncélok Looting table-je}
 \label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
 \hline
- & fegyver5 & fegyver6 & fegyver7 & fegyver8   \\
+ Name & Drop & From  & Rarity & Type & DEF & HP(\%) \\
 \hline
-Típus & Tőr & Kard & Varázsbot & Íj  \\
+ páncél1 & 15\% & 1.Entity & Átlagos & Acél & 10 & 5 \\
 \hline
-Alap támadóérték & 5 & 5 & 5 & 5  \\
+ páncél2 & 15\% & 2.Entity & Átlagos & Bőr & 10 & 5 \\
 \hline
-Hatótáv & 1 & 1 & 5 & 5 \\
+ páncél3 & 15\% & 3.Entity & Átlagos & Lánc& 10 & 5\\
 \hline
-Támadás\% & 10 & 10 & 10 & 10\\
+ páncél4 & 15\% & 4.Entity & Átlagos  & Szövet & 10 & 5\\
+\hline
+ páncél5 & 7\% & 1.Entity & Ritka & Acél & 15 & 10 \\
+\hline
+ páncél6 & 7\% & 2.Entity & Ritka & Bőr & 15 & 10 \\
+\hline
+ páncél7 & 7\% & 3.Entity & Ritka & Lánc & 15 & 10 \\
+\hline
+ páncél8 & 7\% & 4.Entity & Ritka  & Szövet & 15 & 10\\
+ \hline
+ páncél9 & 3\% & 1.Entity & Legendás & Acél & 20 & 15 \\
+\hline
+ páncél10 & 3\% & 2.Entity & Legendás & Bőr & 20 & 15 \\
+\hline
+ páncél11 & 3\% & 3.Entity & Legendás & Lánc & 20 & 15\\
+\hline
+ páncél12 & 3\% & 4.Entity & Legendás  & Szövet & 20 & 15\\
 \hline
 \end{tabular}
 \end{table}
-
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\caption{Legendás Fegyverek alapstatisztikái!}
+\caption{Ékszerek Looting table-je}
 \label{tab:minta}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
- & fegyver9 & fegyver10 & fegyver11 & fegyver12  \\
+ Name & Rarity & Type & Effect & Value(\%) \\
 \hline
-Típus & Tőr & Kard & Varázsbot & Íj\\
+ ékszer1 & 15\% & gyűrű & Krit & 5 \\
 \hline
-Alap támadóérték & 10 & 10 & 10 & 10 \\
+ ékszer2 & 15\% & gyűrű & Krit & 10 \\
 \hline
-Hatótáv & 1 & 1 & 8 & 8 \\
+ ékszer3 & 15\% & gyűrű & Krit & 15\\
 \hline
-Támadás\% & 20 & 20 & 20 & 20 \\
+ ékszer4 & 15\% & gyűrű & Krit  & 20\\
 \hline
-\end{tabular}
-\end{table}
-
-\newpage
-
-Péncélok alapstátusza:HP\% alapstatisztikája:védelem
-
-Páncélok:
-
-\begin{itemize}
-  \item páncél1
-  \item páncél2
-  \item páncél3
-  \item páncél4
-  \item páncél5
-  \item páncél6
-  \item páncél7
-  \item páncél8
-  \item páncél9
-  \item páncél10
-  \item páncél11
-  \item páncél12
-\end{itemize}
-
-\begin{table}[h]
-\centering
-\caption{Átlagos Páncélok alapstatisztikái!}
-\label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
+ ékszer5 & 7\% & karkötő & Kitérés & 5 \\
 \hline
- & páncél1 & páncél2 & páncél3 & páncél4  \\
+ ékszer6 & 7\% & karkötő & Kitérés & 10 \\
 \hline
-Típus & Acél & Bőr & Lánc & Szövet\\
+ ékszer7 & 7\% & karkötő & Kitérés & 15\\
 \hline
-Védelem & 10 & 10 & 10 & 10 \\
+ ékszer8 & 7\% & karkötő & Kitérés  & 20\\
+ \hline
+ ékszer9 & 3\% & nyaklánc & Védelem & 5 \\
 \hline
-Életerő\% & 5 & 5 & 5 & 5 \\
+ ékszer10 & 3\% & nyaklánc & Védelem & 10 \\
 \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\caption{Ritka Páncélok alapstatisztikái!}
-\label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
+ ékszer11 & 3\% & nyaklánc & Védelem & 15\\
 \hline
- & páncél5 & páncél6 & páncél7 & páncél8  \\
+ ékszer12 & 3\% & nyaklánc & Védelem  & 20\\
+ \hline
+ ékszer13 & 3\% & fülbevaló & Életerő & 5 \\
 \hline
-Típus & Acél & Bőr & Lánc & Szövet\\
+ ékszer14 & 3\% & fülbevaló & Életerő & 10 \\
 \hline
-Védelem & 15 & 15 & 15 & 15 \\
+ ékszer15 & 3\% & fülbevaló & Életerő & 15\\
 \hline
-Életerő\% & 10 & 10 & 10 & 10 \\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\caption{Legendás Páncélok alapstatisztikái!}
-\label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
- & páncél1 & páncél2 & páncél3 & páncél4  \\
-\hline
-Típus & Acél & Bőr & Lánc & Szövet\\
-\hline
-Védelem & 25 & 25 & 25 & 25 \\
-\hline
-Életerő\% & 20 & 20 & 20 & 20 \\
-\hline
+ ékszer16 & 3\% & fülbevaló & Életerő  & 20\\
+ \hline
 \end{tabular}
 \end{table}
 
 \newpage
+
 \noindent Ékszerekből maximum 2-őt tud hordani karakterünk.
 
 4 fajtáját különböztetjük meg:
@@ -605,92 +573,6 @@ Védelem & 25 & 25 & 25 & 25 \\
   \item Nyakláncok
   \item Fülbevalók
 \end{itemize}
-
-\noindent Gyűrűk ATK\%-ot,Karkötők HP\%,Nyakláncok Crit rate\%,Fülbevalók Dodge\%-et adhatnak.
-
-Ékszerek:
-
-\begin{itemize}
- \item Gyűrű1
- \item Gyűrű2
- \item Gyűrű3
- \item Gyűrű4
- \item Karkötő1
- \item Karkötő2
- \item Karkötő3
- \item Karkötő4
- \item Nyaklánc1
- \item Nyaklánc2
- \item Nyaklánc3
- \item Nyaklánc4
- \item Fülbevaló1
- \item Fülbevaló2
- \item Fülbevaló3
- \item Fülbevaló4
-\end{itemize}
-\newpage
-Típus alapján:
-
-\begin{table}[h]
-\centering
-\caption{Gyűrűk alapstatisztikái!}
-\label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
- & Gyűrű1 & Gyűrű2 & Gyűrű3 & Gyűrű4  \\
-\hline
-Ritkaság & Áltagos & Ritka & Epik & Legendás\\
-\hline
-Kritikus találat\% & 5 & 10 & 15 & 20 \\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\caption{Karkötők alapstatisztikái!}
-\label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
- & Karkötő1 & Karkötő2 & Karkötő3 & Karkötő4  \\
-\hline
-Ritkaság & Áltagos & Ritka & Epikus & Legendás\\
-\hline
-Kitérés\% & 5 & 10 & 15 & 20 \\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\caption{Nyakláncok alapstatisztikái!}
-\label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
- & Nyaklánc1 & Nyaklánc2 & Nyaklánc3 & Nyaklánc4  \\
-\hline
-Ritkaság & Áltagos & Ritka & Epikus & Legendás\\
-\hline
-Védelem\% & 5 & 10 & 15 & 20 \\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\caption{Fülbevalók alapstatisztikái!}
-\label{tab:minta}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
- & Fülbevaló1 & Fülbevaló2 & Fülbevaló3 & Fülbevaló4  \\
-\hline
-Ritkaság & Áltagos & Ritka & Epikus & Legendás\\
-\hline
-Életerő\% & 5 & 10 & 15 & 20 \\
-\hline
-\end{tabular}
-\end{table}
-\newpage
 
 \SubSection{Kulcsok}
 
