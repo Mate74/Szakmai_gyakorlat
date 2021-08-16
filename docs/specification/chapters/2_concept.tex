@@ -6,7 +6,7 @@ A játék bizonyos játékokból már ismert elemeket tartalmaz, ilyen pédául 
 De milyen szempontokból is próbál egyedi lenne a játék? A hangsúly a környezetünk nagyobb bevonása a 'combat' fázisba és a 'combat' átdolgozása olyanannyira hogy elég komplex legyen az ideális lépések megtalálása.
 A játékot röviden, nagyjából összefoglaló folyamatábra amelyben a közelharc szekvenciát részleteztük egy új folyamatábrában a láthatóság kedvéért. Combat folyamatábra (\ref{fig:combat}. ábra).
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\textwidth]{images/image1.png}
 	\caption{Combat folyamatábra}
@@ -44,21 +44,21 @@ Main menu:
 Ez a gomb akkor szerepel a menüben hogyha egy játékmenet megállításával kerülünk a menübe.
 Ez befejezi a jelenlegi játékmenetünket és visszaírányít minket a főmenübe.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/image2.png}
 	\caption{Főmenü}
 	\label{fig:image2}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/image3.png}
 	\caption{Játékbeli menü}
 	\label{fig:image3}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/image4.png}
 	\caption{Options}
@@ -198,10 +198,10 @@ Karakterünk statisztikáit nem csak a státuszok, hanem a felszerelések is bef
 Minden statisztika minden karakternek más előnyöket ad. Később részletezés. 
 
 Bővebb információk itt találhatóak:%\hyperref[subsec:Felszerelesek] {Felszerelések}
-\begin{table}[h]
+\begin{table}[!ht]
 \centering
 \caption{Osztályok!}
-\label{tab:minta}
+\label{tab:table1}
 \begin{tabular}{|l|c|c|c|c|c|}
 \hline
  & Vándor & Harcos & Nyilas & Tolvaj & Varázsló \\
@@ -227,10 +227,10 @@ Megölt ellenség után kapunk tapasztalatipontot az alapján, hogy milyen tipus
 
 % TODO: Be kellene hivatkozni, hogy ez hol kerül majd részletezésre.
 
-\begin{table}[h]
+\begin{table}[!ht]
 \centering
 \caption{Ellenfelek alapstatisztikái!}
-\label{tab:minta}
+\label{tab:table2}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
  & No. 1 entity & No. 2 entity & No. 3 entity & No. 4 entity  \\
@@ -275,7 +275,7 @@ Semmilyen lövedék nem halad át falakon, zárt ajtókon, térbeli objektumokon
 
 % TODO: A grafikus megjelenítést és a mögötte lévő modellt nem érdemes keverni. Tipikusan először a modellt, majd annak reprezentációját érdemes bemutatni.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\textwidth]{images/image5.png}
 	\caption{Combat folyamatábra}
@@ -324,8 +324,8 @@ A játékon belül minden pozició intiger típussal van megadva.
 
 \noindent Egyéb:
 \begin{itemize}
-    \item Az Entytik elkerülik a rejtett csapdákat.
-    \item Az Entytik 80\%-a alvó állapotba kerül be a szobák egyikébe és úgy is marad amíg meg nem közelíti a játékos az adott szobát.
+    \item Az Entityk elkerülik a rejtett csapdákat.
+    \item Az Entityk 80\%-a alvó állapotba kerül be a szobák egyikébe és úgy is marad amíg meg nem közelíti a játékos az adott szobát.
     \item A többi nem alvó szabadon mozog, valahányszor mi is kört igénylő cselekvést hajtunk végbe.
 \end{itemize}
 
@@ -448,10 +448,10 @@ A kapott érték alsó egészrészét vesszük minden alkalommal.
 Ez a fajta számítás mind ékszereknél mind páncéloknál hasonlóan működik, a különbség csak statisztikákban van.
 
 Felszerelések looting table-jei(Ritkaság alapján)
-\begin{table}[H]
+\begin{table}[!ht]
 \centering
 \caption{Fegyverek Looting table-je}
-\label{tab:minta}
+\label{tab:table3}
 \tabcolsep=0.11cm
 \begin{tabular}{|l|c|c|c|c|c|c|c|}
 \hline
@@ -484,10 +484,10 @@ Felszerelések looting table-jei(Ritkaság alapján)
 \end{tabular}
 \end{table}
 \tabcolsep=0.11cm
-\begin{table}[H]
+\begin{table}[!ht]
 \centering
 \caption{Páncélok Looting table-je}
-\label{tab:minta}
+\label{tab:table4}
 \begin{tabular}{|l|c|c|c|c|c|c|c|}
 \hline
  Name & Drop & From  & Rarity & Type & DEF & HP(\%) \\
@@ -532,10 +532,10 @@ Felszerelések looting table-jei(Ritkaság alapján)
   \item Fülbevalók
 \end{itemize}
 
-\begin{table}[H]
+\begin{table}[!ht]
 \centering
 \caption{Ékszerek táblázata}
-\label{tab:minta}
+\label{tab:table5}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
  Name & Rarity & Type & Effect & Value(\%) \\
@@ -651,14 +651,14 @@ Legyen a fény forrása a karakter, az adott szobában, nagyságától függetle
 A szobákat mindig felülnézetben láthatjuk, ahol a kamera leköveti a karakter mozgását, úgy hogy mindig középen legyen az.
 A bal egérgomb letartásával és egér mozgatásával tudjuk mozgatni a kamerát.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/image6.png}
 	\caption{Kamera 1}
 	\label{fig:camera1}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/image7.png}
 	\caption{Kamera 2}
