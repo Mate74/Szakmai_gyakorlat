@@ -1,0 +1,28 @@
+\BOOKMARK [0][-]{chapter.1}{Bevezet\351s}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Koncepci\363}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Men\374}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Map}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.3}{Szint}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.4}{Combat}{chapter.2}% 6
+\BOOKMARK [2][-]{subsection.2.4.1}{Melee combat}{section.2.4}% 7
+\BOOKMARK [2][-]{subsection.2.4.2}{Ranged combat}{section.2.4}% 8
+\BOOKMARK [1][-]{section.2.5}{Entity}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.6}{T\351rbeli objektumok}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.7}{Loot}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.8}{Itemek}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.8.1}{Felszerel\351sek}{section.2.8}% 13
+\BOOKMARK [2][-]{subsection.2.8.2}{Kulcsok}{section.2.8}% 14
+\BOOKMARK [2][-]{subsection.2.8.3}{Alapanyagok}{section.2.8}% 15
+\BOOKMARK [2][-]{subsection.2.8.4}{Magvak}{section.2.8}% 16
+\BOOKMARK [2][-]{subsection.2.8.5}{F\366zetek}{section.2.8}% 17
+\BOOKMARK [1][-]{section.2.9}{Id\366}{chapter.2}% 18
+\BOOKMARK [1][-]{section.2.10}{Kamera}{chapter.2}% 19
+\BOOKMARK [1][-]{section.2.11}{Ir\341ny\355t\341s}{chapter.2}% 20
+\BOOKMARK [1][-]{section.2.12}{Az interface-n megjelen\366 gombok}{chapter.2}% 21
+\BOOKMARK [2][-]{subsection.2.12.1}{T\341rgyfelv\351teli gomb}{section.2.12}% 22
+\BOOKMARK [2][-]{subsection.2.12.2}{Men\374}{section.2.12}% 23
+\BOOKMARK [2][-]{subsection.2.12.3}{Inventory}{section.2.12}% 24
+\BOOKMARK [2][-]{subsection.2.12.4}{\315j}{section.2.12}% 25
+\BOOKMARK [2][-]{subsection.2.12.5}{S\372g\363}{section.2.12}% 26
+\BOOKMARK [2][-]{subsection.2.12.6}{keres\351s}{section.2.12}% 27
+\BOOKMARK [2][-]{subsection.2.12.7}{Karakter}{section.2.12}% 28
